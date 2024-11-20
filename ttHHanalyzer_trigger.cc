@@ -450,12 +450,20 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
     thisEvent->getStatsComb(thisEvent->getSelbJets(), thisEvent->getSelLeptons(), lbjetStat);
 
 
-    if(!(thisEvent->getSumSelJetScalarpT() > cut["MET"])){ 
-        return false;
+  //  if(!(thisEvent->getSumSelJetScalarpT() > cut["HT"])){ 
+  //    return false;
+  //  }
+  //  cutflow["HT>500"]+=1;
+  //  hCutFlow->Fill("HT>500",1);
+  //  hCutFlow_w->Fill("HT>500",_weight);
+
+    if(!(thisEvent->getMET() > cut["MET"])){ 
+      return false;
     }
     cutflow["MET>20"]+=1;
     hCutFlow->Fill("MET>20",1);
     hCutFlow_w->Fill("MET>20",_weight);
+
 
  
     ////if(!(thisEvent->getnLightJet() >= cut["nlJets"])){
