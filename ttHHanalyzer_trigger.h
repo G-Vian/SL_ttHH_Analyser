@@ -40,8 +40,8 @@ map<std::string, float> cut {
     ////, {"subLeadMuonPt", 15} // subLeadMuon pT higher than
     , {"leadElePt", 30}     //// New Def for leptons to veto at Hadronic channel (this is outdated for the SL channel)
     , {"leadMuonPt", 29}    //// New Def for leptons to veto at Hadronic channel
-    , {"subLeadElePt", 15}  //// New Def for leptons to veto at Hadronic channel (this guys have should be "vetod")
-    , {"subLeadMuonPt", 15} //// New Def for leptons to veto at Hadronic channel (this guys have should be "vetod")
+    , {"subLeadElePt", 15}  //// New Def for leptons to veto at Hadronic channel (this guys  should be "vetod")
+    , {"subLeadMuonPt", 15} //// New Def for leptons to veto at Hadronic channel (this guys  should be "vetod")
     //    , {"vetoLepPt", 15} // lepton pT higher than
     , {"boostedJetPt", 10} // boostedJet pT higher than
     , {"6thJetsPT", 20} // PT of the 6th jet above 40?
