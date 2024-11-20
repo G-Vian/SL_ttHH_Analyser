@@ -416,9 +416,9 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
     if(!(thisEvent->getnSelJet() >= cut["nJets"] )){
 	return false;
     }
-    cutflow["njets>=6"]+=1;                 
-    hCutFlow->Fill("njets>=6",1);
-    hCutFlow_w->Fill("njets>=6",_weight);
+    cutflow["njets>=4"]+=1;                 
+    hCutFlow->Fill("njets>=4",1);
+    hCutFlow_w->Fill("njets>=4",_weight);
 
 
     if(!(thisEvent->getnbJet() >= cut["nbJets"])){
@@ -434,9 +434,9 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
     if(!(thisEvent->getSelJets()->at(5)->getp4()->Pt() > cut["6thJetsPT"])){
             return false;
     }
-    cutflow["6thJetsPT>40"]+=1;
-    hCutFlow->Fill("6thJetsPT>40",1);
-    hCutFlow_w->Fill("6thJetsPT>40",_weight);
+    cutflow["6thJetsPT>20"]+=1;
+    hCutFlow->Fill("6thJetsPT>20",1);
+    hCutFlow_w->Fill("6thJetsPT>20",_weight);
 
 
     ////if(!(thisEvent->getnSelLepton() == cut["nLeptons"])){
@@ -450,12 +450,12 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
     thisEvent->getStatsComb(thisEvent->getSelbJets(), thisEvent->getSelLeptons(), lbjetStat);
 
 
-    if(!(thisEvent->getSumSelJetScalarpT() > cut["HT"])){
+    if(!(thisEvent->getSumSelJetScalarpT() > cut["MET"])){ /// Originally was HT
         return false;
     }
-    cutflow["HT>500"]+=1;
-    hCutFlow->Fill("HT>500",1);
-    hCutFlow_w->Fill("HT>500",_weight);
+    cutflow["MET>20"]+=1;
+    hCutFlow->Fill("MET>20",1);
+    hCutFlow_w->Fill("MET>20",_weight);
 
  
     ////if(!(thisEvent->getnLightJet() >= cut["nlJets"])){
