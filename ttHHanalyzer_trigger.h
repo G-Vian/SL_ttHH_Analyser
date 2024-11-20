@@ -29,29 +29,31 @@ const float cZMass = 91.;
 
 
 map<std::string, float> cut { 
-    {"nJets", 6} // nJets higher than 
-    , {"nLeptons", 0} // nLepton equals to
+    {"nJets", 4} // nJets higher than 
+    , {"nLeptons", 1} // nLepton equals to
     //, {"nVetoLeptons", 0} // nVetoLepton equals to
-    , {"nbJets", 3}
+    , {"nbJets", 3} //is this #_bjets or #_b_tagged_jets?
     , {"jetPt", 30} // jet pT higher than
     ////, {"leadElePt", 25} // leadElectron pT higher than
     ////, {"leadMuonPt", 25} // leadMuon pT higher than
     ////, {"subLeadElePt", 15} // subLeadElectron pT higher than
     ////, {"subLeadMuonPt", 15} // subLeadMuon pT higher than
-    , {"leadElePt", 15}     //// New Def for leptons to veto at Hadronic channel 
-    , {"leadMuonPt", 15}    //// New Def for leptons to veto at Hadronic channel
-    , {"subLeadElePt", 15}  //// New Def for leptons to veto at Hadronic channel
-    , {"subLeadMuonPt", 15} //// New Def for leptons to veto at Hadronic channel
+    , {"leadElePt", 30}     //// New Def for leptons to veto at Hadronic channel (this is outdated for the SL channel)
+    , {"leadMuonPt", 29}    //// New Def for leptons to veto at Hadronic channel
+    , {"subLeadElePt", 15}  //// New Def for leptons to veto at Hadronic channel (this guys have should be "vetod")
+    , {"subLeadMuonPt", 15} //// New Def for leptons to veto at Hadronic channel (this guys have should be "vetod")
     //    , {"vetoLepPt", 15} // lepton pT higher than
     , {"boostedJetPt", 10} // boostedJet pT higher than
-    , {"6thJetsPT", 40}
-    , {"HT", 500}
+    , {"6thJetsPT", 20} // PT of the 6th jet above 40?
+    , {"MET", 20}
     , {"nlJets", 0} // light jet higher than
     , {"hadHiggsPt", 20} // hadronic Higgs pT higher than
-    , {"jetEta", 2.4} // jet eta higher than
-    , {"eleEta", 2.4} // electron eta higher than
-    , {"muonEta", 2.4} // muon eta higher than
+    , {"jetEta", 2.5} // jet eta higher than
+    , {"eleEta", 2.5} // electron eta higher than
+    , {"muonEta", 2.5} // muon eta higher than
     , {"boostedJetEta", 2.4} // boostedJet eta higher than
+    , {"eleID", 4} // this is for tight electrons (have to confirm)
+    , {"muonID", 4} // this is for tight muon (have to confirm)
     , {"muonIso", 0.2} // muon isolation less than
     , {"eleIso", 0.1}  // ele isolation less than
     , {"jetID", 6}   // pass tight and tightLepVeto ID
