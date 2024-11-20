@@ -1,1 +1,3 @@
-
+root://xrootd-cms.infn.it///store/mc/Run3Winter22NanoAOD/TTToSemiLeptonic_TuneCP5_13p6TeV-powheg-pythia8/NANOAODSIM/FlatPU0to70_pilot_122X_mcRun3_2021_realistic_v9-v1/2550000/2aaa46f2-f6a3-49be-a3e8-8b989b54a623.root
+root://xrootd-cms.infn.it///store/mc/Run3Winter22NanoAOD/TTToSemiLeptonic_TuneCP5_13p6TeV-powheg-pythia8/NANOAODSIM/FlatPU0to70_pilot_122X_mcRun3_2021_realistic_v9-v1/2550000/3a867217-160b-497a-b10a-280cc9984590.root
+root://xrootd-cms.infn.it///store/mc/Run3Winter22NanoAOD/TTToSemiLeptonic_TuneCP5_13p6TeV-powheg-pythia8/NANOAODSIM/FlatPU0to70_pilot_122X_mcRun3_2021_realistic_v9-v1/2550000/3f56ee9b-8cb3-47b5-87a6-e11526ff691b.root
