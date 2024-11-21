@@ -457,9 +457,11 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
   //  hCutFlow->Fill("HT>500",1);
   //  hCutFlow_w->Fill("HT>500",_weight);
 
-    if(!(thisEvent->getMET()->getp4()->Pt() > cut["MET"])){ 
+    if(!(thisEvent->getMET()->getp4()->Pt() > cut["MET"])){  
       return false;
     }
+// This sequence retrieves the missing transverse energy (MET) of the event by accessing its 4-momentum 
+//vector and then extracting the transverse momentum (Pt) from it.	
     cutflow["MET>20"]+=1;
     hCutFlow->Fill("MET>20",1);
     hCutFlow_w->Fill("MET>20",_weight);
