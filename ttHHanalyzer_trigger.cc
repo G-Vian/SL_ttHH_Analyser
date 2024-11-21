@@ -457,7 +457,7 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
   //  hCutFlow->Fill("HT>500",1);
   //  hCutFlow_w->Fill("HT>500",_weight);
 
-    if(!(thisEvent->getMET() > cut["MET"])){ 
+    if(!(thisEvent->getMET()->getp4()->Pt() > cut["MET"])){ 
       return false;
     }
     cutflow["MET>20"]+=1;
