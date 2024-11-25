@@ -430,10 +430,21 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
     
     // if(!(thisEvent->getnSelLepton()  == cut["nLeptons"])){
     ////if(thisEvent->getnSelLepton() < 1){
-   
-    if(!(thisEvent->getSelJets()->at(5)->getp4()->Pt() > cut["6thJetsPT"])){
-            return false;
+	
+   ////This line is problematic for the SL channel; we need to ensure that there are indeed six jets in the event before the program accesses the sixth one.
+    ///if(!(thisEvent->getSelJets()->at(5)->getp4()->Pt() > cut["6thJetsPT"])){
+    ///        return false;
+    ///}
+
+// Ensure there are at least 6 jets before accessing index 5
+    if (thisEvent->getSelJets()->size() > 5) {
+        if (!(thisEvent->getSelJets()->at(5)->getp4()->Pt() > cut["6thJetsPT"])) {
+            return false; // Does not pass the cut
+        }
+    } else {
+        return false; // Not enough jets to apply the cut
     }
+
     cutflow["6thJetsPT>20"]+=1;
     hCutFlow->Fill("6thJetsPT>20",1);
     hCutFlow_w->Fill("6thJetsPT>20",_weight);
