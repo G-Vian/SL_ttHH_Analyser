@@ -461,18 +461,18 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
     thisEvent->getStatsComb(thisEvent->getSelbJets(), thisEvent->getSelLeptons(), lbjetStat);
 
 
-  //  if(!(thisEvent->getSumSelJetScalarpT() > cut["HT"])){ 
-  //    return false;
-  //  }
-  //  cutflow["HT>500"]+=1;
-  //  hCutFlow->Fill("HT>500",1);
-  //  hCutFlow_w->Fill("HT>500",_weight);
+    if(!(thisEvent->getSumSelJetScalarpT() > cut["HT"])){ 
+      return false;
+    }
+    cutflow["HT>0"]+=1;
+    hCutFlow->Fill("HT>0",1);
+    hCutFlow_w->Fill("HT>0",_weight);
 
+// This sequence retrieves the missing transverse energy (MET) of the event by accessing its 4-momentum 
+//vector and then extracting the transverse momentum (Pt) from it.	
     if(!(thisEvent->getMET()->getp4()->Pt() > cut["MET"])){  
       return false;
     }
-// This sequence retrieves the missing transverse energy (MET) of the event by accessing its 4-momentum 
-//vector and then extracting the transverse momentum (Pt) from it.	
     cutflow["MET>20"]+=1;
     hCutFlow->Fill("MET>20",1);
     hCutFlow_w->Fill("MET>20",_weight);
