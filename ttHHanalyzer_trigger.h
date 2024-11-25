@@ -32,7 +32,7 @@ map<std::string, float> cut {
     {"nJets", 4} // nJets higher than 
     , {"nLeptons", 1} // nLepton equals to
     //, {"nVetoLeptons", 0} // nVetoLepton equals to
-    , {"nbJets", 3} //is this #_bjets or #_b_tagged_jets?
+    , {"nbJets", 3} // #_b_tagged_jets?
     , {"jetPt", 30} // jet pT higher than
     ////, {"leadElePt", 25} // leadElectron pT higher than
     ////, {"leadMuonPt", 25} // leadMuon pT higher than
@@ -44,8 +44,9 @@ map<std::string, float> cut {
     , {"subLeadMuonPt", 15} //// New Def for leptons to veto at Hadronic channel (this guys  should be "vetod")
     //    , {"vetoLepPt", 15} // lepton pT higher than
     , {"boostedJetPt", 10} // boostedJet pT higher than
-    , {"6thJetsPT", 20} // PT of the 6th jet above 40?
+    , {"6thJetsPT", 20} // PT of the 6th jet above 20
     , {"MET", 20}
+    , {"HT", 0}
     , {"nlJets", 0} // light jet higher than
     , {"hadHiggsPt", 20} // hadronic Higgs pT higher than
     , {"jetEta", 2.5} // jet eta higher than
