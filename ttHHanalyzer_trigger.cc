@@ -441,14 +441,14 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
 //    if (thisEvent->getSelJets()->size() > 5) {
 //        if (!(thisEvent->getSelJets()->at(5)->getp4()->Pt() > cut["6thJetsPT"])) {
 //            return false; // Does not pass the cut
-        }
-    } else {
-        return false; // Not enough jets to apply the cut
-    }
+//        }
+//    } else {
+//        return false; // Not enough jets to apply the cut
+//    }
 
-    cutflow["6thJetsPT>20"]+=1;
-    hCutFlow->Fill("6thJetsPT>20",1);
-    hCutFlow_w->Fill("6thJetsPT>20",_weight);
+//    cutflow["6thJetsPT>20"]+=1;
+//    hCutFlow->Fill("6thJetsPT>20",1);
+//    hCutFlow_w->Fill("6thJetsPT>20",_weight);
 
 
     if(!(thisEvent->getnSelLepton() == cut["nLeptons"])){
