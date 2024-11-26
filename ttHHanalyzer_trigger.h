@@ -40,21 +40,21 @@ map<std::string, float> cut {
     ////, {"subLeadMuonPt", 15} // subLeadMuon pT higher than
     , {"leadElePt", 30}     //// New Def for leptons to veto at Hadronic channel (this is outdated for the SL channel)
     , {"leadMuonPt", 29}    //// New Def for leptons to veto at Hadronic channel
-    , {"subLeadElePt", 15}  //// New Def for leptons to veto at Hadronic channel (this guys  should be "vetod")
-    , {"subLeadMuonPt", 15} //// New Def for leptons to veto at Hadronic channel (this guys  should be "vetod")
-    //    , {"vetoLepPt", 15} // lepton pT higher than
+    , {"subLeadElePt", 15}  //// New Def for leptons to veto at Hadronic channel (these guys  should be "vetoed")
+    , {"subLeadMuonPt", 15} //// New Def for leptons to veto at Hadronic channel (these guys  should be "vetoed")
+    , {"vetoLepPt", 15} // lepton pT higher than (restored)
     , {"boostedJetPt", 10} // boostedJet pT higher than
     , {"6thJetsPT", 20} // PT of the 6th jet above 20
     , {"MET", 20}
     , {"HT", 0}
     , {"nlJets", 0} // light jet higher than
-    , {"hadHiggsPt", 20} // hadronic Higgs pT higher than
+    , {"hadHiggsPt", 20} // hadronic Higgs pT higher than (what is this variable?)
     , {"jetEta", 2.5} // jet eta higher than
     , {"eleEta", 2.5} // electron eta higher than
     , {"muonEta", 2.5} // muon eta higher than
     , {"boostedJetEta", 2.4} // boostedJet eta higher than
-    , {"eleID", 4} // this is for tight electrons (have to confirm)
-    , {"muonID", 4} // this is for tight muon (have to confirm)
+    , {"eleID", 4} // this is for tight electrons
+    , {"muonID", 4} // this is for tight muon 
     , {"muonIso", 0.2} // muon isolation less than
     , {"eleIso", 0.1}  // ele isolation less than
     , {"jetID", 6}   // pass tight and tightLepVeto ID
@@ -222,7 +222,7 @@ class event{
     }
     
     void selectLepton(objectLep * lepton){
-	//	_sumLeptonScalarpT+=fabs(lepton->getp4()->Pt());  
+	_sumLeptonScalarpT+=fabs(lepton->getp4()->Pt());  //(restored)
 	_selectLeptons.push_back(lepton);
     }
 
