@@ -68,13 +68,13 @@ class objectPhysics {
  public:
     enum lFlavor{kNA, kEle, kMuon}; //used to categorize or identify the type of lepton in analyses ("Not Applicable." )
     explicit objectPhysics(const float pT, const float eta, const float phi, const float mass = 0){
-	_p4.SetPtEtaPhiM(pT, eta, phi, mass); // defines a 4-vector as (pT, eta, phi, mass)
+	_p4.SetPtEtaPhiM(pT, eta, phi, mass); //calculates the four-momentum _p4=(px, py, pz, E) using pT, eta, phi & mass  (not sure, should verify)
     }
     }
     
     TLorentzVector * getp4(){
-	return &_p4; //get access to p4, which is a TLorentzVector defined as (pT, eta, phi, mass)
-    }
+	return &_p4; //this returns a pointer to the _p4, which is a TLorentzVector, allowing the user to access and modify the it
+    }// applies the Jet Scale correction to the p4=(px, py, pz, E)  vector.
     objectPhysics(){};
     void scale(float JES, bool up = true){
 	_pxOffset = JES * _p4.Px();
@@ -86,7 +86,7 @@ class objectPhysics {
 	} else {
 	    _p4.SetPxPyPzE(_p4.Px()-_pxOffset,_p4.Py()-_pyOffset,_p4.Pz()-_pzOffset, _p4.E()-_EOffset);
 	}
-    }
+    }// applies the Jet off set correction to the p4=(px, py, pz, E) vector.
     std::vector<float> getOffset(){
 	std::vector<float> offset = {_pxOffset,_pyOffset,_pzOffset,_EOffset};
 	return offset;
@@ -210,7 +210,8 @@ class event{
 
     
     void addJet(objectJet * jet){
-	_sumJetScalarpT+=fabs(jet->getp4()->Pt());
+	_sumJetScalarpT+=fabs(jet->getp4()->Pt());// getp4()->Pt() calculates the PT from the four vector _p4 = (px, py, pz, E). 
+	    				         // _sumJetScalarpT = HT = sum (=+) over the abolute value of the PT (fabs(jet->getp4()->Pt())) os each jet
 	_sumJetp4+= * jet->getp4();
 	_jets.push_back(jet);
     }
