@@ -66,13 +66,13 @@ map<std::string, float> cut {
 
 class objectPhysics {
  public:
-    enum lFlavor{kNA, kEle, kMuon};
+    enum lFlavor{kNA, kEle, kMuon}; //used to categorize or identify the type of lepton in analyses ("Not Applicable." )
     explicit objectPhysics(const float pT, const float eta, const float phi, const float mass = 0){
-	_p4.SetPtEtaPhiM(pT, eta, phi, mass);
+	_p4.SetPtEtaPhiM(pT, eta, phi, mass); //
     }
     
     TLorentzVector * getp4(){
-	return &_p4;
+	return &_p4; //get access to p4, which is a TLorentzVector defined as (pT, eta, phi, mass)
     }
     objectPhysics(){};
     void scale(float JES, bool up = true){
