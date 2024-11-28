@@ -68,7 +68,8 @@ class objectPhysics {
  public:
     enum lFlavor{kNA, kEle, kMuon}; //used to categorize or identify the type of lepton in analyses ("Not Applicable." )
     explicit objectPhysics(const float pT, const float eta, const float phi, const float mass = 0){
-	_p4.SetPtEtaPhiM(pT, eta, phi, mass); //
+	_p4.SetPtEtaPhiM(pT, eta, phi, mass); // defines a 4-vector as (pT, eta, phi, mass)
+    }
     }
     
     TLorentzVector * getp4(){
