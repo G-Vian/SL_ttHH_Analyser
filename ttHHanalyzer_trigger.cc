@@ -38,6 +38,9 @@ void ttHHanalyzer::performAnalysis(){
 
 }
 
+
+
+
 void ttHHanalyzer::loop(sysName sysType, bool up){
 
     int nevents = _ev->size();
@@ -206,7 +209,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
     //			 _ev->Flag_EcalDeadCellTriggerPrimitiveFilter ||
     //			 _ev->Flag_BadPFMuonFilter);
    
-  
+	
     thisEvent->setPV(_ev->PV_npvsGood);
     std::vector<eventBuffer::GenPart_s> genPart = _ev->GenPart;      
     std::vector<eventBuffer::Jet_s> jet = _ev->Jet;
@@ -218,7 +221,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
     objectJet * currentJet;
     objectLep * currentMuon;
     objectLep * currentEle;
-    int nVetoMuons = 0, nVetoEle = 0;
+    int nVetoMuons = 0, nVetoEle = 0;// (ask Aurore)
     objectMET * MET = new objectMET(_ev->PuppiMET_pt, 0, _ev->PuppiMET_phi, 0);
     float e = 1., es  = 1., pe = 1., pes = 1.;
     float me = 1., mes = 1., pme = 1.,  pmes = 1.;   
