@@ -424,8 +424,12 @@ class event{
 	return _selectMuons.size(); 
     }
 
+//For the SL case we want only one lepton, so there is no sense in ordering leptons [vian]
+
+/*
+
     bool orderLeptons(){
-	if(_selectLeptons.size() != 2)
+	if(_selectLeptons.size() != 2) 
 	    return false;
 	else {
 	    objectLep* tmp; 
@@ -438,7 +442,9 @@ class event{
 	    }
 	    return true;
 	}
-    }
+    } 
+
+*/ 
 
     bool orderJets(){
         if(_selectJets.size() < 2){
