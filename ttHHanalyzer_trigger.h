@@ -64,10 +64,10 @@ map<std::string, float> cut {
     , {"filter", -1} // MET filter (not used)
     , {"pv", 0}}; // primary vertex  (not aplied) 
 
-class objectPhysics { //creation of a class objectPhysics that enumerate the lepton flavors and calculate p4 using PT, ETa, Phi and mass [vian]
- public: //means it can be used outside the class [vian]
-    enum lFlavor{kNA, kEle, kMuon}; //used to categorize or identify the type of lepton in analyses ("Not Applicable." ) [vian]
-    explicit objectPhysics(const float pT, const float eta, const float phi, const float mass = 0){ //the class creates a constructor that receives values of pt, eta, phi, m (mass is being initialized) [vian]
+class objectPhysics { //creation of a class objectPhysics that enumerate the lepton flavors and calculate p4 using PT, ETa, Phi and mass 
+ public: //means it can be used outside the class 
+    enum lFlavor{kNA, kEle, kMuon}; //used to categorize or identify the type of lepton in analyses ("Not Applicable." ) 
+    explicit objectPhysics(const float pT, const float eta, const float phi, const float mass = 0){ //the class creates a constructor that receives values of pt, eta, phi, m (mass is being initialized) 
 	_p4.SetPtEtaPhiM(pT, eta, phi, mass); //calculates the four-momentum _p4=(px, py, pz, E) using pT, eta, phi & mass  [vian]
     }
     }
@@ -104,7 +104,7 @@ class objectPhysics { //creation of a class objectPhysics that enumerate the lep
 };
 
 
-class objectGenPart:public objectPhysics { //it is deriving a class objectGenPart from a more general class "objectPhysics"
+class objectGenPart:public objectPhysics { //it is deriving a class objectGenPart from a more general class "objectPhysics" [vian]
  public:    
     using objectPhysics::objectPhysics;
     bool hasHiggsMother = false;
@@ -213,7 +213,7 @@ class event{
 	_sumJetScalarpT+=fabs(jet->getp4()->Pt());// getp4()->Pt() calculates the PT from the four vector _p4 = (px, py, pz, E). 
 	    				         //_sumJetScalarpT (HT) is incremented (+=) by the absolute value of the jet's transverse momentum (pT).
 	_sumJetp4+= * jet->getp4(); //Adds the four-momentum (p4) of the jet to _sumJetp4. This gives the total four-momentum of all jets.
-	_jets.push_back(jet); //  Adds the jet object to the _jets vector, storing it in the collection of jets.
+	_jets.push_back(jet); //  Adds the jet object to the _jets vector, storing it in the collection of jets [vian]. 
     }
     
     void selectJet(objectJet * jet){
