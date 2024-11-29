@@ -74,7 +74,7 @@ class objectPhysics { //creation of a class objectPhysics that enumerate the lep
     
     TLorentzVector * getp4(){
 	return &_p4; //this returns a pointer to the _p4, which is a TLorentzVector, allowing the user to access and modify it
-    }// applies the Jet Scale correction to the p4=(px, py, pz, E)  vector.
+    }// applies the Jet Scale correction to the p4=(px, py, pz, E)  vector. [vian]
     objectPhysics(){};
     void scale(float JES, bool up = true){
 	_pxOffset = JES * _p4.Px();
