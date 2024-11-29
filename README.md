@@ -26,7 +26,7 @@ xrdcp root://eosuser.cern.ch//eos/user/j/junghyun/public/TTH.tar.gz .
 #    --> https://cernbox.cern.ch/s/xPBQqigATEjgFQb
 
 tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz
-mv TTH ttHHAnalyzer/.
+mv TTH SL_ttHHAnalyzer/.
 ```
 
 ## Compilation to make execution file
