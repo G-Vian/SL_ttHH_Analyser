@@ -60,20 +60,20 @@ map<std::string, float> cut {
     , {"jetID", 6}   // pass tight and tightLepVeto ID
     , {"jetPUid", 4}   // pass loose cut fail tight and medium
     , {"bTagDisc", 0.80}
-    , {"trigger", 1} // trigger
-    , {"filter", -1} // MET filter
-    , {"pv", 0}}; // primary vertex  
+    , {"trigger", 1} // trigger (used)
+    , {"filter", -1} // MET filter (not used)
+    , {"pv", 0}}; // primary vertex  (not aplied) 
 
-class objectPhysics {
- public:
-    enum lFlavor{kNA, kEle, kMuon}; //used to categorize or identify the type of lepton in analyses ("Not Applicable." )
-    explicit objectPhysics(const float pT, const float eta, const float phi, const float mass = 0){
-	_p4.SetPtEtaPhiM(pT, eta, phi, mass); //calculates the four-momentum _p4=(px, py, pz, E) using pT, eta, phi & mass  (not sure, should verify)
+class objectPhysics { //creation of a class objectPhysics that enumerate the lepton flavors and calculate p4 using PT, ETa, Phi and mass [vian]
+ public: //means it can be used outside the class [vian]
+    enum lFlavor{kNA, kEle, kMuon}; //used to categorize or identify the type of lepton in analyses ("Not Applicable." ) [vian]
+    explicit objectPhysics(const float pT, const float eta, const float phi, const float mass = 0){ //the class creates a constructor that receives values of pt, eta, phi, m (mass is being initialized) [vian]
+	_p4.SetPtEtaPhiM(pT, eta, phi, mass); //calculates the four-momentum _p4=(px, py, pz, E) using pT, eta, phi & mass  [vian]
     }
     }
     
     TLorentzVector * getp4(){
-	return &_p4; //this returns a pointer to the _p4, which is a TLorentzVector, allowing the user to access and modify the it
+	return &_p4; //this returns a pointer to the _p4, which is a TLorentzVector, allowing the user to access and modify it
     }// applies the Jet Scale correction to the p4=(px, py, pz, E)  vector.
     objectPhysics(){};
     void scale(float JES, bool up = true){
@@ -104,7 +104,7 @@ class objectPhysics {
 };
 
 
-class objectGenPart:public objectPhysics { 
+class objectGenPart:public objectPhysics { //it is deriving a class objectGenPart from a more general class "objectPhysics"
  public:    
     using objectPhysics::objectPhysics;
     bool hasHiggsMother = false;
