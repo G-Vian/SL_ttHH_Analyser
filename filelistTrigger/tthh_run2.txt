@@ -1,0 +1,12 @@
+root://xrootd-cms.infn.it///store/mc/RunIISummer20UL16NanoAODAPVv2/TTHHTo4b_TuneCP5_13TeV-madgraph-pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v9-v1/2430000/A64279D7-02D0-3D4B-9C1E-7C8F819E3250.root
+
+root://xrootd-cms.infn.it///store/mc/RunIISummer20UL16NanoAODAPVv2/TTHHTo4b_TuneCP5_13TeV-madgraph-pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v9-v1/2430000/FECF7D97-4BEC-6A47-8E3A-E569FE74A3A8.root
+
+root://xrootd-cms.infn.it///store/mc/RunIISummer20UL16NanoAODAPVv2/TTHHTo4b_TuneCP5_13TeV-madgraph-pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v9-v1/24310000/57A26790-46F7-CD45-B934-D90BFD163F02.root
+
+root://xrootd-cms.infn.it///store/mc/RunIISummer20UL16NanoAODAPVv2/TTHHTo4b_TuneCP5_13TeV-madgraph-pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v9-v1/24310000/8C6D3B75-9EBA-CF48-B7D3-D0812C6A021B.root
+
+root://xrootd-cms.infn.it//store/mc/RunIISummer20UL16NanoAODAPVv2/TTHHTo4b_TuneCP5_13TeV-madgraph-pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v9-v1/2540000/0A5B29AA-8782-C04B-AA46-52866AFF954D.root
+
+root://xrootd-cms.infn.it//store/mc/RunIISummer20UL16NanoAODAPVv2/TTHHTo4b_TuneCP5_13TeV-madgraph-pythia8/NANOAODSIM/106X_mcRun2_asymptotic_preVFP_v9-v1/2540000/1B917B8D-D36C-0B46-BBCE-D85733589303.root
+
