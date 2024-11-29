@@ -209,11 +209,11 @@ class event{
     EventShape * eventShapeJet, * eventShapeBjet;
 
     
-    void addJet(objectJet * jet){
+    void addJet(objectJet * jet){ /// this function "addJet" adds a jet object to a collection of jets and updates the HT and Total p4.
 	_sumJetScalarpT+=fabs(jet->getp4()->Pt());// getp4()->Pt() calculates the PT from the four vector _p4 = (px, py, pz, E). 
-	    				         // _sumJetScalarpT = HT = sum (=+) over the abolute value of the PT (fabs(jet->getp4()->Pt())) os each jet
-	_sumJetp4+= * jet->getp4();
-	_jets.push_back(jet);
+	    				         //_sumJetScalarpT (HT) is incremented (+=) by the absolute value of the jet's transverse momentum (pT).
+	_sumJetp4+= * jet->getp4(); //Adds the four-momentum (p4) of the jet to _sumJetp4. This gives the total four-momentum of all jets.
+	_jets.push_back(jet); //  Adds the jet object to the _jets vector, storing it in the collection of jets.
     }
     
     void selectJet(objectJet * jet){
