@@ -23,7 +23,9 @@ git clone https://github.com/G-Vian/SL_ttHH_Analyser.git
 xrdcp root://eosuser.cern.ch//eos/user/j/junghyun/public/TTH.tar.gz .
 # If above line doesn't work, then download [ TTH.tar.gz ] at CERNBOX link:
 #    --> https://cernbox.cern.ch/s/xPBQqigATEjgFQb
+
 wget https://cernbox.cern.ch/remote.php/dav/public-files/xPBQqigATEjgFQb/TTH.tar.gz
+
 tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz
 mv TTH  SL_ttHH_Analyser/.
 ```
