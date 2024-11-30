@@ -295,7 +295,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
          	}
          }
      }
-    thisEvent->orderLeptons();
+  //  thisEvent->orderLeptons(); (This should be reactivated later)
 
     float dR = 0., deltaEta = 0., deltaPhi = 0.;
     for(int i=0; i < jet.size(); i++){
