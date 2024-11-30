@@ -18,8 +18,7 @@ Note that lxplus does not support the el7 environment directly now, so you’ll 
 cmssw-el7
 cmsrel CMSSW_10_6_28
 cd CMSSW_10_6_28/src && cmsenv
-git clone https://github.com/Junghyun-Lee-Physicist/ttHHAnalyzer.git
-
+git clone https://github.com/G-Vian/SL_ttHH_Analyser.git
 # Before using xrood protocol to copy TTH directory, please get the proxy first
 xrdcp root://eosuser.cern.ch//eos/user/j/junghyun/public/TTH.tar.gz .
 # If above line doesn't work, then download [ TTH.tar.gz ] at CERNBOX link:
