@@ -108,9 +108,15 @@ void ttHHanalyzer::loop(sysName sysType, bool up){
 }
 
 void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
-
+    // Function to create and initialize event objects for analysis.
+    // Parameters:
+    // - thisEvent: Pointer to the current event object containing event data.
+    // - sysType: Type of systematic uncertainty being handled (e.g., JES, JER, etc.).
+    // - up: Boolean flag indicating whether the systematic variation is "up" (true) or "down" (false).	
     _ev->fillObjects();
-
+    // Calls the fillObjects() method on the _ev member, which populates collections of objects 
+    // (e.g., jets, leptons, MET) from the raw event data. This prepares all necessary objects 
+    // for subsequent analysis steps. [g. vian]
  
     thisEvent->setMuonTrigger(
         _ev->HLT_IsoMu27
@@ -210,20 +216,20 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
     //			 _ev->Flag_BadPFMuonFilter);
    
 	
-    thisEvent->setPV(_ev->PV_npvsGood);
-    std::vector<eventBuffer::GenPart_s> genPart = _ev->GenPart;      
-    std::vector<eventBuffer::Jet_s> jet = _ev->Jet;
+    thisEvent->setPV(_ev->PV_npvsGood); // Sets the primary vertex (PV) of the event.
+    std::vector<eventBuffer::GenPart_s> genPart = _ev->GenPart; // Creates a vector 'genPart' to hold all generator-level particles (GenPart), getting the data from '_ev'.
+    std::vector<eventBuffer::Jet_s> jet = _ev->Jet; 
     std::vector<eventBuffer::Muon_s> muonT = _ev->Muon;
     std::vector<eventBuffer::Electron_s> ele = _ev->Electron;
     std::vector<eventBuffer::FatJet_s> boostedJet = _ev->FatJet;
-    objectGenPart * currentGenPart; 
+    objectGenPart * currentGenPart; // Declares a pointer to an 'objectGenPart'.
     objectBoostedJet * currentBoostedJet;
     objectJet * currentJet;
     objectLep * currentMuon;
     objectLep * currentEle;
-    int nVetoMuons = 0, nVetoEle = 0;// (ask Aurore)
+    int nVetoMuons = 0, nVetoEle = 0;// // Initializes counters for "veto" muons and electrons to 0.
     objectMET * MET = new objectMET(_ev->PuppiMET_pt, 0, _ev->PuppiMET_phi, 0);
-    float e = 1., es  = 1., pe = 1., pes = 1.;
+    float e = 1., es  = 1., pe = 1., pes = 1.; // Declares and initializes several float variables 
     float me = 1., mes = 1., pme = 1.,  pmes = 1.;   
     thisEvent->setMET(MET);
 
@@ -244,7 +250,8 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
 	}
     }
     
-
+//I'm unsure why, but the leading leptons were not being stored, only the subleading. I modified it to store only the Leading. 
+/*
     bool thereIsALeadLepton = false;
 	
     for(int i = 0; i < muonT.size(); i++){
@@ -295,8 +302,79 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
          	}
          }
      }
-  //  thisEvent->orderLeptons(); (This should be reactivated later)
+	
+  //  thisEvent->orderLeptons(); (We want only one lepton per event in the SL channel) [g. vian]
+*/
 
+//Modified version to store only one lepton per event
+
+    bool thereIsALeadLepton = false;
+	
+    for(int i = 0; i < muonT.size(); i++){
+	if(fabs(muonT[i].eta) < cut["muonEta"] && muonT[i].tightId == true && muonT[i].pfRelIso04_all  < cut["muonIso"]){
+	//if(fabs(muonT[i].eta) < cut["muonEta"] && muonT[i].mvaTTH > 0.15 && muonT[i].pfRelIso04_all  < cut["muonIso"]){
+	    if(muonT[i].pt > cut["leadMuonPt"]){
+		thereIsALeadLepton = true;
+         	currentMuon = new objectLep(muonT[i].pt, muonT[i].eta, muonT[i].phi, 0.);
+         	currentMuon->charge = muonT[i].charge;
+         	currentMuon->miniPFRelIso = muonT[i].miniPFRelIso_all;
+         	currentMuon->pfRelIso04 = muonT[i].pfRelIso04_all;
+         	thisEvent->selectMuon(currentMuon);		    
+		break;
+	    }
+	}
+    }
+    if(!thereIsALeadLepton){
+	for(int i = 0; i < ele.size(); i++){
+	    if(fabs(ele[i].deltaEtaSC + ele[i].eta) < 1.4442 || fabs(ele[i].deltaEtaSC + ele[i].eta) > 1.5660){  //Electrons tracked neither in the barrel nor in the endcap are discarded.
+		if(fabs(ele[i].eta) < cut["eleEta"] && ele[i].mvaFall17V2Iso_WP90 == true && ele[i].pfRelIso03_all  < cut["eleIso"]){ 
+		    if(ele[i].pt > cut["leadElePt"]){
+			thereIsALeadLepton = true;
+			currentEle = new objectLep(ele[i].pt, ele[i].eta, ele[i].phi, 0.);	 
+         		currentEle->charge = ele[i].charge;
+         		currentEle->miniPFRelIso = ele[i].miniPFRelIso_all;
+         		currentEle->pfRelIso03 = ele[i].pfRelIso03_all;
+         		thisEvent->selectEle(currentEle);
+			break;
+		    }
+		}
+	    }
+	}
+    }
+	/*
+     if(thereIsALeadLepton){ //we can add all leptons passing to the sublead selection to our containers
+         for(int i = 0; i < muonT.size(); i++){
+             if(fabs(muonT[i].eta) < cut["muonEta"] && muonT[i].tightId == true && muonT[i].pfRelIso04_all < cut["muonIso"]){
+             //	    if(fabs(muonT[i].eta) < cut["muonEta"] && muonT[i].mvaTTH > 0.15 && muonT[i].pfRelIso04_all  < cut["muonIso"]){	
+         	if(muonT[i].pt > cut["subLeadMuonPt"]){
+         	    currentMuon = new objectLep(muonT[i].pt, muonT[i].eta, muonT[i].phi, 0.);
+         	    currentMuon->charge = muonT[i].charge;
+         	    currentMuon->miniPFRelIso = muonT[i].miniPFRelIso_all;
+         	    currentMuon->pfRelIso04 = muonT[i].pfRelIso04_all;
+         	    thisEvent->selectMuon(currentMuon);
+         	}
+             }
+         }
+         for(int i = 0; i < ele.size(); i++){
+             if(fabs(ele[i].deltaEtaSC + ele[i].eta) < 1.4442 || fabs(ele[i].deltaEtaSC + ele[i].eta) > 1.5660){  //Electrons tracked neither in the barrel nor in the endcap are discarded.
+         	      if(fabs(ele[i].eta) < cut["eleEta"] && ele[i].mvaFall17V2Iso_WP90 == true && ele[i].pfRelIso03_all  < cut["eleIso"]){ 
+                  if(ele[i].pt > cut["subLeadElePt"]){
+         		currentEle = new objectLep(ele[i].pt, ele[i].eta, ele[i].phi, 0.);	 
+         		currentEle->charge = ele[i].charge;
+         		currentEle->miniPFRelIso = ele[i].miniPFRelIso_all;
+         		currentEle->pfRelIso03 = ele[i].pfRelIso03_all;
+         		thisEvent->selectEle(currentEle);
+         	      }
+               }
+         	}
+         }
+     }
+	
+  //  thisEvent->orderLeptons(); 
+
+	*/
+	
+	
     float dR = 0., deltaEta = 0., deltaPhi = 0.;
     for(int i=0; i < jet.size(); i++){
        	currentJet = new objectJet(jet[i].pt, jet[i].eta, jet[i].phi, jet[i].mass);
