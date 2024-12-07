@@ -4,7 +4,6 @@ import os
 import sys
 import time
 import subprocess
-
 script_dir = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(script_dir, 'python', 'ttHHmodules'))
 import ProxyChecker
