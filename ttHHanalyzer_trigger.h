@@ -64,8 +64,8 @@ map<std::string, float> cut {
     , {"filter", -1} // MET filter (not used)
     , {"pv", 0}}; // primary vertex  (not aplied) 
 
-//creation of a class objectPhysics that enumerate the lepton flavors and calculate p4 using PT, ETa, Phi and mass 
-//the class creates a explicit constructor that receives values of pt, eta, phi, m (mass is being initialized) 
+//creation of a class objectPhysics that enumerates the lepton flavors and calculates four-momentum (p4) using PT, ETa, Phi and mass 
+//the class creates an explicit constructor that receives values of pt, eta, phi, m (mass is being initialized) 
 //calculates the four-momentum _p4=(px, py, pz, E) using pT, eta, phi & mass  [vian]
 
 class objectPhysics { 
