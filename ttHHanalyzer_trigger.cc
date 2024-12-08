@@ -250,7 +250,6 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
 	}
     }
     
-//I'm unsure why, but the leading leptons were not being stored, only the subleading. I modified it to store only the Leading. 
 /*
     bool thereIsALeadLepton = false;
 	
