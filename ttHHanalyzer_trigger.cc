@@ -1038,27 +1038,27 @@ void ttHHanalyzer::fillHistos(event * thisEvent){
 	hLightJetsBTagDisc.at(ih)->Fill(getlightJetCSV(thisEvent).at(ih),_weight*thisEvent->getbTagSys());
     }
 
-    /*    hleptonNumber->Fill(thisEvent->getnSelLepton(),_weight*thisEvent->getbTagSys());
+    hleptonNumber->Fill(thisEvent->getnSelLepton(),_weight*thisEvent->getbTagSys());
 
 
-    if(thisEvent->getnSelMuon() == 2){
-	hDiMuonMass->Fill(thisEvent->getSelMuonsMass(),_weight*thisEvent->getbTagSys());
-	hDiMuonPT->Fill(thisEvent->getSelMuonsPT(),_weight*thisEvent->getbTagSys());
-	hDiMuonEta->Fill(thisEvent->getSelMuonsEta(),_weight*thisEvent->getbTagSys());
-    }
+    //if(thisEvent->getnSelMuon() == 2){
+//	hDiMuonMass->Fill(thisEvent->getSelMuonsMass(),_weight*thisEvent->getbTagSys());
+//	hDiMuonPT->Fill(thisEvent->getSelMuonsPT(),_weight*thisEvent->getbTagSys());
+//	hDiMuonEta->Fill(thisEvent->getSelMuonsEta(),_weight*thisEvent->getbTagSys());
+ //   }
 
-    if(thisEvent->getnSelElectron() == 2){
-	hDiElectronMass->Fill(thisEvent->getSelElectronsMass(),_weight*thisEvent->getbTagSys());
-	hDiElectronPT->Fill(thisEvent->getSelElectronsPT(),_weight*thisEvent->getbTagSys());
-	hDiElectronEta->Fill(thisEvent->getSelElectronsEta(),_weight*thisEvent->getbTagSys());
-    }
+//    if(thisEvent->getnSelElectron() == 2){
+//	hDiElectronMass->Fill(thisEvent->getSelElectronsMass(),_weight*thisEvent->getbTagSys());
+//	hDiElectronPT->Fill(thisEvent->getSelElectronsPT(),_weight*thisEvent->getbTagSys());
+//	hDiElectronEta->Fill(thisEvent->getSelElectronsEta(),_weight*thisEvent->getbTagSys());
+ //   }
 
     hleptonHT->Fill(thisEvent->getSelLeptonHT(),_weight*thisEvent->getbTagSys());
     hST->Fill(thisEvent->getSelLeptonST(),_weight*thisEvent->getbTagSys());
     hLeptonPT1->Fill(thisEvent->getSelLeptons()->at(0)->getp4()->Pt(), _weight*thisEvent->getbTagSys());
     hLeptonEta1->Fill(thisEvent->getSelLeptons()->at(0)->getp4()->Eta(), _weight*thisEvent->getbTagSys());
-    hLeptonPT2->Fill(thisEvent->getSelLeptons()->at(1)->getp4()->Pt(), _weight*thisEvent->getbTagSys());
-    hLeptonEta2->Fill(thisEvent->getSelLeptons()->at(1)->getp4()->Eta(), _weight*thisEvent->getbTagSys());
+//    hLeptonPT2->Fill(thisEvent->getSelLeptons()->at(1)->getp4()->Pt(), _weight*thisEvent->getbTagSys());
+//    hLeptonEta2->Fill(thisEvent->getSelLeptons()->at(1)->getp4()->Eta(), _weight*thisEvent->getbTagSys());
 
 
     if(thisEvent->getnSelMuon() > 0){
@@ -1070,7 +1070,7 @@ void ttHHanalyzer::fillHistos(event * thisEvent){
 	hElePT1->Fill(thisEvent->getSelElectrons()->at(0)->getp4()->Pt(), _weight*thisEvent->getbTagSys());
 	hEleEta1->Fill(thisEvent->getSelElectrons()->at(0)->getp4()->Eta(), _weight*thisEvent->getbTagSys());
     }
-    
+    /*
     if(thisEvent->getnSelMuon() > 1){
 	hMuonPT2->Fill(thisEvent->getSelMuons()->at(1)->getp4()->Pt(), _weight*thisEvent->getbTagSys());
 	hMuonEta2->Fill(thisEvent->getSelMuons()->at(1)->getp4()->Eta(), _weight*thisEvent->getbTagSys());
@@ -1079,11 +1079,11 @@ void ttHHanalyzer::fillHistos(event * thisEvent){
     if(thisEvent->getnSelElectron() > 1){
 	hElePT2->Fill(thisEvent->getSelElectrons()->at(1)->getp4()->Pt(), _weight*thisEvent->getbTagSys());
 	hEleEta2->Fill(thisEvent->getSelElectrons()->at(1)->getp4()->Eta(), _weight*thisEvent->getbTagSys());
-    } 
+    } */
 
     hLepCharge1->Fill(thisEvent->getSelLeptons()->at(0)->charge, _weight*thisEvent->getbTagSys());
-    hLepCharge2->Fill(thisEvent->getSelLeptons()->at(1)->charge, _weight*thisEvent->getbTagSys());
-    */
+   // hLepCharge2->Fill(thisEvent->getSelLeptons()->at(1)->charge, _weight*thisEvent->getbTagSys());
+    
 }
 
 
@@ -1218,16 +1218,16 @@ void ttHHanalyzer::writeHistos(){
 
     _histoDirs.at(1)->cd();
     
-    /*    hLepCharge1->Write();
-    hLepCharge2->Write();
+    hLepCharge1->Write();
+    //hLepCharge2->Write();
 
     hleptonNumber->Write();
-    hDiMuonMass->Write();
-    hDiElectronMass->Write();
-    hDiMuonPT->Write();
-    hDiElectronPT->Write();
-    hDiMuonEta->Write();
-    hDiElectronEta->Write();
+   // hDiMuonMass->Write();
+   // hDiElectronMass->Write();
+   // hDiMuonPT->Write();
+  //  hDiElectronPT->Write();
+   // hDiMuonEta->Write();
+  //  hDiElectronEta->Write();
     hleptonHT->Write();
     hST->Write();
     hLeptonEta1->Write();
@@ -1239,10 +1239,10 @@ void ttHHanalyzer::writeHistos(){
     hMuonPT1->Write();
     hEleEta1->Write();
     hElePT1->Write();
-    hMuonEta2->Write();
-    hMuonPT2->Write();
-    hEleEta2->Write();
-    hElePT2->Write(); */
+//    hMuonEta2->Write();
+//    hMuonPT2->Write();
+//    hEleEta2->Write();
+//   hElePT2->Write(); 
 }
 void ttHHanalyzer::fillTree(event * thisEvent){
 
@@ -1628,12 +1628,12 @@ void ttHHanalyzer::fillTree(event * thisEvent){
     bbdValue = thisEvent->eventShapeBjet->getD();
     ////passHadTrig = thisEvent->getHadTriggerAccept();
 
-    /*    bleptonPT1 = thisEvent->getSelLeptons()->at(0)->getp4()->Pt();
-    bleptonPT2 = thisEvent->getSelLeptons()->at(1)->getp4()->Pt();
+    bleptonPT1 = thisEvent->getSelLeptons()->at(0)->getp4()->Pt();
+   // bleptonPT2 = thisEvent->getSelLeptons()->at(1)->getp4()->Pt();
     bleptonEta1 = thisEvent->getSelLeptons()->at(0)->getp4()->Eta();
-    bleptonEta2 = thisEvent->getSelLeptons()->at(1)->getp4()->Eta();
+ //   bleptonEta2 = thisEvent->getSelLeptons()->at(1)->getp4()->Eta();
     bleptonCharge1 = thisEvent->getSelLeptons()->at(0)->charge;
-    bleptonCharge2 = thisEvent->getSelLeptons()->at(1)->charge;
+//    bleptonCharge2 = thisEvent->getSelLeptons()->at(1)->charge;
     bleptonHT = thisEvent->getSelLeptonHT();
     bST = thisEvent->getSelLeptonST();
 
@@ -1646,7 +1646,7 @@ void ttHHanalyzer::fillTree(event * thisEvent){
 	bmuonEta1 = -6;
     }
 
-    if(thisEvent->getnSelMuon() > 1){
+/*    if(thisEvent->getnSelMuon() > 1){
 	bmuonPT2 = thisEvent->getSelMuons()->at(1)->getp4()->Pt();
 	bmuonEta2 = thisEvent->getSelMuons()->at(1)->getp4()->Eta();
 	bdiMuonMass = thisEvent->getSelMuonsMass();
@@ -1654,7 +1654,7 @@ void ttHHanalyzer::fillTree(event * thisEvent){
 	bmuonPT2 = -6;
 	bmuonEta2 = -6;
 	bdiMuonMass = -6;
-    } 
+    } */
 
     if(thisEvent->getnSelElectron() > 0){
 	belePT1 = thisEvent->getSelElectrons()->at(0)->getp4()->Pt();
@@ -1663,7 +1663,7 @@ void ttHHanalyzer::fillTree(event * thisEvent){
 	belePT1 = -6;
 	beleEta1 = -6;
     }
-
+/*
     if(thisEvent->getnSelElectron() > 1){
 	belePT2 = thisEvent->getSelElectrons()->at(1)->getp4()->Pt();
 	beleEta2 = thisEvent->getSelElectrons()->at(1)->getp4()->Eta();
