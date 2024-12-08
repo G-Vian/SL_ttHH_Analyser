@@ -531,14 +531,16 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
 //    hCutFlow->Fill("6thJetsPT>20",1);
 //    hCutFlow_w->Fill("6thJetsPT>20",_weight);
 
-
+// Check if the number of selected leptons is equal to the expected number (cut["nLeptons"])
+// If not, return false, meaning the event doesn't pass this selection.
     if(!(thisEvent->getnSelLepton() == cut["nLeptons"])){
         return false;
     }
     cutflow["nlepton==1"]+=1;                 
     hCutFlow->Fill("nlepton==1", 1);
     hCutFlow_w->Fill("nlepton==1", _weight);
-
+// Get the statistics for the combination of selected jets and selected leptons (ljetStat), 
+// which may include various metrics like the number of jets, energy, etc.
     thisEvent->getStatsComb(thisEvent->getSelJets(), thisEvent->getSelLeptons(), ljetStat);
     thisEvent->getStatsComb(thisEvent->getSelbJets(), thisEvent->getSelLeptons(), lbjetStat);
 
