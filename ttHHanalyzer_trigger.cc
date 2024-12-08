@@ -533,6 +533,8 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
 
 // Check if the number of selected leptons is equal to the expected number (cut["nLeptons"])
 // If not, return false, meaning the event doesn't pass this selection.
+// It is important to check the cut only in Selected Lepton number, as other leptons may appear in the events 
+//coming from gamma --> lepton anti-lepton, but these would not pass the PT cut. The lepton passing the PT cut should be those coming from W decay
     if(!(thisEvent->getnSelLepton() == cut["nLeptons"])){
         return false;
     }
@@ -1262,7 +1264,7 @@ void ttHHanalyzer::fillTree(event * thisEvent){
     passTrigger_4J3T_B    = _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07;
     passTrigger_4J3T_CDEF = _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0;
 
-    nMuons = thisEvent->getnSelMuon();
+    nMuons = thisEvent->getnSelMuon(); //maybe this is causing the problem
     nJets = thisEvent->getnSelJet();
     nbJets = thisEvent->getnbJet();
     HT = thisEvent->getSumSelJetScalarpT();
