@@ -249,7 +249,8 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
 	    }
 	}
     }
-    
+// verify if there is a leading lepton candidate --> if yes, accept and store all leptons with PT > subleading PT (this will include also the leading candidate)
+// order all the leptons. This will provide a list of leptons ordered by PT that obey PT >  subleading PT
 /*
     bool thereIsALeadLepton = false;
 	
