@@ -230,7 +230,7 @@ class event{
     }
     
     void selectLepton(objectLep * lepton){
-	_sumLeptonScalarpT+=fabs(lepton->getp4()->Pt());  //(restored)
+	_sumSelLeptonScalarpT+=fabs(lepton->getp4()->Pt());  
 	_selectLeptons.push_back(lepton);
     }
 
@@ -432,7 +432,7 @@ class event{
 
 //For the SL case we want only one lepton, so there is no sense in ordering leptons [vian]
 
-/
+
 
     bool orderLeptons(){
 	if(_selectLeptons.size() != 2) 
