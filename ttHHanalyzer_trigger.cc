@@ -470,28 +470,39 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
 // the selected leptons are with PT>(subleading_PT), so one must also require aditional selection criteria.
 //my version [g. vian]
 
-// Check if the number of selected leptons matches the expected value
-if (!(thisEvent->getnSelLepton() == cut["nLeptons"])) {
-    return false; // Reject the event if the number of leptons does not meet the criteria
+// Check if there are selected leptons
+if (thisEvent->getSelLeptons()->size() == cut["nLeptons"]) {
+    cutflow["nlepton==1"] += 1;
+    hCutFlow->Fill("nlepton==1", 1);
+    hCutFlow_w->Fill("nlepton==1", _weight);
+
+    // Check if the leptons vector is not empty
+    if (!thisEvent->getSelLeptons()->empty()) {
+        // Access the first lepton in the list
+        objectLep* selectedLepton = thisEvent->getSelLeptons()->at(0);
+
+        // Check if the lepton is an electron and if pT is greater than 30 GeV
+        if (selectedLepton->flavor == objectLep::kEle && selectedLepton->getp4()->Pt() > 30) {
+            // Event accepted, lepton is an electron with pT above 30 GeV
+            return true;
+        }
+        // Check if the lepton is a muon and if pT is greater than 29 GeV
+        else if (selectedLepton->flavor == objectLep::kMuon && selectedLepton->getp4()->Pt() > 29) {
+            // Event accepted, lepton is a muon with pT above 29 GeV
+            return true;
+        } else {
+            // If the lepton does not meet the pT criteria
+            return false;
+        }
+    } else {
+        // If there are no selected leptons
+        return false;
+    }
+} else {
+    // If the number of leptons is not equal to the expected value
+    return false;
 }
 
-// Retrieve the selected lepton
-objectLep* selectedLepton = thisEvent->getselectedLepton(0); // Assuming only one lepton is selected
-double leptonPt = fabs(selectedLepton->getp4()->Pt()); // Get the transverse momentum (pT) of the lepton
-
-// Check the lepton type and its transverse momentum
-if (selectedLepton->flavor == objectLep::kEle && leptonPt < 30) {
-    return false; // Reject the event if it's an electron with pT < 30 GeV
-} else if (selectedLepton->flavor == objectLep::kMuon && leptonPt < 29) {
-    return false; // Reject the event if it's a muon with pT < 40 GeV
-}
-
-// Update the cutflow and histograms since the event passes all criteria
-cutflow["nlepton==1"] += 1; // Increment the cutflow counter for "nlepton==1"
-hCutFlow->Fill("nlepton==1", 1); // Fill the histogram for "nlepton==1" without weight
-hCutFlow_w->Fill("nlepton==1", _weight); // Fill the histogram for "nlepton==1" with event weight
-
-return true; // Accept the event
 
   /* (original)
   if(!(thisEvent->getnSelLepton() == cut["nLeptons"])){
