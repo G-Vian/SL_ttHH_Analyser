@@ -476,7 +476,7 @@ if (!(thisEvent->getnSelLepton() == cut["nLeptons"])) {
 }
 
 // Retrieve the selected lepton
-objectLep* selectedLepton = thisEvent->getSelectedLepton(0); // Assuming only one lepton is selected
+objectLep* selectedLepton = thisEvent->getselectedLepton(0); // Assuming only one lepton is selected
 double leptonPt = fabs(selectedLepton->getp4()->Pt()); // Get the transverse momentum (pT) of the lepton
 
 // Check the lepton type and its transverse momentum
