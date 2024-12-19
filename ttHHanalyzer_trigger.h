@@ -230,7 +230,7 @@ class event{
     }
     
     void selectLepton(objectLep * lepton){
-//	_sumLeptonScalarpT+=fabs(lepton->getp4()->Pt());  //(restored)
+	_sumLeptonScalarpT+=fabs(lepton->getp4()->Pt());  //(restored)
 	_selectLeptons.push_back(lepton);
     }
 
