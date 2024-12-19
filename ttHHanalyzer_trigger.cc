@@ -251,7 +251,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
     }
 // verify if there is a leading lepton candidate --> if yes, accept and store all leptons with PT > subleading PT (this will include also the leading candidate)
 // order all the leptons. This will provide a list of leptons ordered by PT that obey PT >  subleading PT
-/*
+
     bool thereIsALeadLepton = false;
 	
     for(int i = 0; i < muonT.size(); i++){
@@ -303,76 +303,11 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
          }
      }
 	
-  //  thisEvent->orderLeptons(); (We want only one lepton per event in the SL channel) [g. vian]
-*/
+    thisEvent->orderLeptons(); 
+// store the leptons with PT>15, then we select events with Nleptons=1 and PT>cut [g. vian]
 
-//Modified version to store only one lepton per event
 
-    bool thereIsALeadLepton = false;
-	
-    for(int i = 0; i < muonT.size(); i++){
-	if(fabs(muonT[i].eta) < cut["muonEta"] && muonT[i].tightId == true && muonT[i].pfRelIso04_all  < cut["muonIso"]){
-	//if(fabs(muonT[i].eta) < cut["muonEta"] && muonT[i].mvaTTH > 0.15 && muonT[i].pfRelIso04_all  < cut["muonIso"]){
-	    if(muonT[i].pt > cut["leadMuonPt"]){
-		thereIsALeadLepton = true;
-         	currentMuon = new objectLep(muonT[i].pt, muonT[i].eta, muonT[i].phi, 0.);
-         	currentMuon->charge = muonT[i].charge;
-         	currentMuon->miniPFRelIso = muonT[i].miniPFRelIso_all;
-         	currentMuon->pfRelIso04 = muonT[i].pfRelIso04_all;
-         	thisEvent->selectMuon(currentMuon);		    
-		break;
-	    }
-	}
-    }
-    if(!thereIsALeadLepton){
-	for(int i = 0; i < ele.size(); i++){
-	    if(fabs(ele[i].deltaEtaSC + ele[i].eta) < 1.4442 || fabs(ele[i].deltaEtaSC + ele[i].eta) > 1.5660){  //Electrons tracked neither in the barrel nor in the endcap are discarded.
-		if(fabs(ele[i].eta) < cut["eleEta"] && ele[i].mvaFall17V2Iso_WP90 == true && ele[i].pfRelIso03_all  < cut["eleIso"]){ 
-		    if(ele[i].pt > cut["leadElePt"]){
-			thereIsALeadLepton = true;
-			currentEle = new objectLep(ele[i].pt, ele[i].eta, ele[i].phi, 0.);	 
-         		currentEle->charge = ele[i].charge;
-         		currentEle->miniPFRelIso = ele[i].miniPFRelIso_all;
-         		currentEle->pfRelIso03 = ele[i].pfRelIso03_all;
-         		thisEvent->selectEle(currentEle);
-			break;
-		    }
-		}
-	    }
-	}
-    }
-	/*
-     if(thereIsALeadLepton){ //we can add all leptons passing to the sublead selection to our containers
-         for(int i = 0; i < muonT.size(); i++){
-             if(fabs(muonT[i].eta) < cut["muonEta"] && muonT[i].tightId == true && muonT[i].pfRelIso04_all < cut["muonIso"]){
-             //	    if(fabs(muonT[i].eta) < cut["muonEta"] && muonT[i].mvaTTH > 0.15 && muonT[i].pfRelIso04_all  < cut["muonIso"]){	
-         	if(muonT[i].pt > cut["subLeadMuonPt"]){
-         	    currentMuon = new objectLep(muonT[i].pt, muonT[i].eta, muonT[i].phi, 0.);
-         	    currentMuon->charge = muonT[i].charge;
-         	    currentMuon->miniPFRelIso = muonT[i].miniPFRelIso_all;
-         	    currentMuon->pfRelIso04 = muonT[i].pfRelIso04_all;
-         	    thisEvent->selectMuon(currentMuon);
-         	}
-             }
-         }
-         for(int i = 0; i < ele.size(); i++){
-             if(fabs(ele[i].deltaEtaSC + ele[i].eta) < 1.4442 || fabs(ele[i].deltaEtaSC + ele[i].eta) > 1.5660){  //Electrons tracked neither in the barrel nor in the endcap are discarded.
-         	      if(fabs(ele[i].eta) < cut["eleEta"] && ele[i].mvaFall17V2Iso_WP90 == true && ele[i].pfRelIso03_all  < cut["eleIso"]){ 
-                  if(ele[i].pt > cut["subLeadElePt"]){
-         		currentEle = new objectLep(ele[i].pt, ele[i].eta, ele[i].phi, 0.);	 
-         		currentEle->charge = ele[i].charge;
-         		currentEle->miniPFRelIso = ele[i].miniPFRelIso_all;
-         		currentEle->pfRelIso03 = ele[i].pfRelIso03_all;
-         		thisEvent->selectEle(currentEle);
-         	      }
-               }
-         	}
-         }
-     }
-	
-  //  thisEvent->orderLeptons(); 
 
-	*/
 	
 	
     float dR = 0., deltaEta = 0., deltaPhi = 0.;
@@ -509,8 +444,7 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
     hCutFlow->Fill("nbjets>=3",1);
     hCutFlow_w->Fill("nbjets>=3",_weight);
     
-    // if(!(thisEvent->getnSelLepton()  == cut["nLeptons"])){
-    ////if(thisEvent->getnSelLepton() < 1){
+
 	
    ////This part is problematic for the SL channel; we need to ensure that there are indeed six jets in the event before the program accesses the sixth one.
     ///if(!(thisEvent->getSelJets()->at(5)->getp4()->Pt() > cut["6thJetsPT"])){
@@ -533,14 +467,41 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
 
 // Check if the number of selected leptons is equal to the expected number (cut["nLeptons"])
 // If not, return false, meaning the event doesn't pass this selection.
-// It is important to check the cut only in Selected Lepton number, as other leptons may appear in the events 
-//coming from gamma --> lepton anti-lepton, but these would not pass the PT cut. The lepton passing the PT cut should be those coming from W decay
-    if(!(thisEvent->getnSelLepton() == cut["nLeptons"])){
+// the selected leptons are with PT>(subleading_PT), so one must also require aditional selection criteria.
+//my version [g. vian]
+
+// Check if the number of selected leptons matches the expected value
+if (!(thisEvent->getnSelLepton() == cut["nLeptons"])) {
+    return false; // Reject the event if the number of leptons does not meet the criteria
+}
+
+// Retrieve the selected lepton
+objectLep* selectedLepton = thisEvent->getSelectedLepton(0); // Assuming only one lepton is selected
+double leptonPt = fabs(selectedLepton->getp4()->Pt()); // Get the transverse momentum (pT) of the lepton
+
+// Check the lepton type and its transverse momentum
+if (selectedLepton->flavor == objectLep::kEle && leptonPt < 30) {
+    return false; // Reject the event if it's an electron with pT < 30 GeV
+} else if (selectedLepton->flavor == objectLep::kMuon && leptonPt < 29) {
+    return false; // Reject the event if it's a muon with pT < 40 GeV
+}
+
+// Update the cutflow and histograms since the event passes all criteria
+cutflow["nlepton==1"] += 1; // Increment the cutflow counter for "nlepton==1"
+hCutFlow->Fill("nlepton==1", 1); // Fill the histogram for "nlepton==1" without weight
+hCutFlow_w->Fill("nlepton==1", _weight); // Fill the histogram for "nlepton==1" with event weight
+
+return true; // Accept the event
+
+  /* (original)
+  if(!(thisEvent->getnSelLepton() == cut["nLeptons"])){
         return false;
     }
     cutflow["nlepton==1"]+=1;                 
     hCutFlow->Fill("nlepton==1", 1);
     hCutFlow_w->Fill("nlepton==1", _weight);
+*/
+	
 // Get the statistics for the combination of selected jets and selected leptons (ljetStat), 
 // which may include various metrics like the number of jets, energy, etc.
     thisEvent->getStatsComb(thisEvent->getSelJets(), thisEvent->getSelLeptons(), ljetStat);
