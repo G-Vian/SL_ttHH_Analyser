@@ -430,9 +430,8 @@ class event{
 	return _selectMuons.size(); 
     }
 
-//For the SL case we want only one lepton, so there is no sense in ordering leptons [vian]
 
-
+/* Original, not working
 
     bool orderLeptons(){
 	if(_selectLeptons.size() != 2) 
@@ -449,6 +448,22 @@ class event{
 	    return true;
 	}
     } 
+
+*/
+
+//  implementation of orderLeptons for ordering leptons by pT
+bool orderLeptons() {
+    if (_selectLeptons.size() < 2) {
+        return false;
+    } else {
+        // Sorting leptons by their transverse momentum (pT)
+        std::sort(_selectLeptons.begin(), _selectLeptons.end(), [](const auto& lepton1, const auto& lepton2) {
+            return lepton1->getp4()->Pt() > lepton2->getp4()->Pt();
+        });
+        return true;
+    }
+}
+
 
 
     bool orderJets(){
