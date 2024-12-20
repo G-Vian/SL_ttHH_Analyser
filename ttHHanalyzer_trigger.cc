@@ -482,7 +482,7 @@ if (thisEvent->getSelLeptons()->size() == cut["nLeptons"] && thisEvent->getSelLe
 	        objectLep* selectedLepton = thisEvent->getSelLeptons()->at(0);
 	
 	        // Check if the lepton is an electron and if pT is greater than leadElePt
-	        if (selectedLepton->flavor == objectLep::kEle && selectedLepton->getp4()->Pt() > cut["leadElePt"]) {
+	        if (selectedLepton->flavor == objectLep::kEle && selectedLepton->getp4()->Pt() > cut["leadElePt"] ) {
 	            // Event accepted, lepton is an electron with pT above leadElePt
 	            return true;
 	        }
@@ -1604,6 +1604,25 @@ void ttHHanalyzer::fillTree(event * thisEvent){
     bbdValue = thisEvent->eventShapeBjet->getD();
     ////passHadTrig = thisEvent->getHadTriggerAccept();
 
+
+
+    if(thisEvent->getnSelMuon() > 0 && thisEvent->getSelMuons()->at(0)->getp4()->Pt() > cut["leadMuonPt"]){
+	bmuonPT1 = thisEvent->getSelMuons()->at(0)->getp4()->Pt();
+	bmuonEta1 = thisEvent->getSelMuons()->at(0)->getp4()->Eta();
+    } else {
+	bmuonPT1 = -6;
+	bmuonEta1 = -6;
+    }
+
+
+
+    if(thisEvent->getnSelElectron() > 0 && thisEvent->getSelElectrons()->at(0)->getp4()->Pt() > cut["leadElePt"]){
+	belePT1 = thisEvent->getSelElectrons()->at(0)->getp4()->Pt();
+	beleEta1 = thisEvent->getSelElectrons()->at(0)->getp4()->Eta();
+    } else {
+	belePT1 = -6;
+	beleEta1 = -6;
+    }
     bleptonPT1 = thisEvent->getSelLeptons()->at(0)->getp4()->Pt();
    // bleptonPT2 = thisEvent->getSelLeptons()->at(1)->getp4()->Pt();
     bleptonEta1 = thisEvent->getSelLeptons()->at(0)->getp4()->Eta();
@@ -1614,13 +1633,6 @@ void ttHHanalyzer::fillTree(event * thisEvent){
     bST = thisEvent->getSelLeptonST();
 
 
-    if(thisEvent->getnSelMuon() > 0){
-	bmuonPT1 = thisEvent->getSelMuons()->at(0)->getp4()->Pt();
-	bmuonEta1 = thisEvent->getSelMuons()->at(0)->getp4()->Eta();
-    } else {
-	bmuonPT1 = -6;
-	bmuonEta1 = -6;
-    }
 
 /*    if(thisEvent->getnSelMuon() > 1){
 	bmuonPT2 = thisEvent->getSelMuons()->at(1)->getp4()->Pt();
@@ -1632,13 +1644,7 @@ void ttHHanalyzer::fillTree(event * thisEvent){
 	bdiMuonMass = -6;
     } */
 
-    if(thisEvent->getnSelElectron() > 0){
-	belePT1 = thisEvent->getSelElectrons()->at(0)->getp4()->Pt();
-	beleEta1 = thisEvent->getSelElectrons()->at(0)->getp4()->Eta();
-    } else {
-	belePT1 = -6;
-	beleEta1 = -6;
-    }
+														  
 /*
     if(thisEvent->getnSelElectron() > 1){
 	belePT2 = thisEvent->getSelElectrons()->at(1)->getp4()->Pt();
