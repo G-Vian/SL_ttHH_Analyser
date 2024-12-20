@@ -28,6 +28,7 @@ wget https://cernbox.cern.ch/remote.php/dav/public-files/xPBQqigATEjgFQb/TTH.tar
 
 tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz
 mv TTH  SL_ttHH_Analyser/.
+(faster) tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz && mv TTH  SL_ttHH_Analyser/.
 ```
 
 ## Compilation to make execution file
@@ -46,6 +47,8 @@ If you specify an output file for the proxy with the ```--out``` option, set the
 ```bash
 voms-proxy-init --voms cms --valid 96:00 --out proxy.cert
 export X509_USER_PROXY=proxy.cert
+(faster) voms-proxy-init --voms cms --valid 96:00 --out proxy.cert && export X509_USER_PROXY=proxy.cert
+
 ```
 Currently, to submit Condor jobs, a **proxy.cert** file with valid time remaining must be present in the analyzer directory. You can check the remaining valid time with the following command:
 ```bash
@@ -58,6 +61,7 @@ voms-proxy-info -file ./proxy.cert --timeleft
 # ./<exe name> <path of the file list> <output name> <weight> <year> <MC or Data> <run name - just name it you want>
 ./ttHHanalyzer_trigger filelistTest/file_ttHH_0.txt test_output_ttHH_0.root 0.00000109763773 2017 MC ttHH_MC_Test
 ./ttHHanalyzer_trigger filelistTest/file_SingleMuon_C_0.txt test_output_JetHT_C_0.root 1.0 2017 Data JetHT_C_Data_Test
+./ttHHanalyzer_trigger filelistTest/file_TT2L2Nu.txt out_put_TT2L2Nu.root  29.3022405372 2021 MC TT2L2Nu_MC_2021
 ```
 
 ## Running with Condor
