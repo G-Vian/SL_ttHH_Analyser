@@ -1,0 +1,1 @@
+/store/mc/Run3Winter22NanoAOD/TTTo2L2Nu_CP5_13p6TeV_powheg-pythia8/NANOAODSIM/122X_mcRun3_2021_realistic_v9-v1/40000/b228f31a-ed9c-45e5-b3ca-00a866435b46.root
