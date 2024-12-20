@@ -329,10 +329,10 @@ class event{
 	return _sumSelLightJetScalarpT;
     }
 
-    float getSumSelLeptonScalarpT(){   
-	return _sumSelMuonScalarpT + _sumSelElectronScalarpT;
+    float getSumSelLeptonScalarpT() {   
+        float _sumSelLeptonScalarpT = _sumSelMuonScalarpT + _sumSelElectronScalarpT;
+        return _sumSelLeptonScalarpT;
     }
-
     float getSumSelLeptonpT(){   
 	return _sumSelMuonp4.Pt() + _sumSelElectronp4.Pt();
     }
