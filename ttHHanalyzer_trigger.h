@@ -944,7 +944,7 @@ class ttHHanalyzer {
 
 
 
-    fifo_map<std::string,int> cutflow{{"noCut", 0}, {"MuonTrigger", 0}, {"njets>=4", 0}, {"nbjets>=3", 0}, {"6thJetsPT>20", 0}, {"nlepton==1", 0}, {"MET>20", 0}, {"nljets>=2", 0}, {"30<ljetsM<250", 0}, {"HadTrigger", 0}};
+    fifo_map<std::string,int> cutflow{{"noCut", 0}, {"leadElePt", 30}, {"leadMuonPt", 29} {"MuonTrigger", 0}, {"njets>=4", 0}, {"nbjets>=3", 0}, {"6thJetsPT>20", 0}, {"nlepton==1", 0}, {"MET>20", 0}, {"nljets>=2", 0}, {"30<ljetsM<250", 0}, {"HadTrigger", 0}};
     //fifo_map<std::string,int> cutflow_w{{"noCut", 0}, {"MuonTrigger", 0}, {"nJets>=6", 0}, {"nbJets>=4", 0}, {"6thJetsPT>40", 0}, {"nlepton==0", 0}, {"HT>500", 0}, {"nljets>=2", 0}, {"30<ljetsM<250", 0}, {"HadTrigger", 0}};
     //    fifo_map<std::string,int> cutflow{{"noCut", 0}, {"njets>3", 0}, {"nbjets>2", 0}, {"nlepton==2", 0}, {"nOpositeChargedLep", 0}, {"nMassCut", 0}, {"nTotal", 0}};
 
