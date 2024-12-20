@@ -471,7 +471,7 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
 //my version [g. vian]
 
 // Check if there are selected leptons
-if (thisEvent->getSelLeptons()->size() == cut["nLeptons"]) {
+if (thisEvent->getSelLeptons()->size() == cut["nLeptons"] && thisEvent->getSelLeptons()->size() < 2) {
     cutflow["nlepton==1"] += 1;
     hCutFlow->Fill("nlepton==1", 1);
     hCutFlow_w->Fill("nlepton==1", _weight);
@@ -481,14 +481,14 @@ if (thisEvent->getSelLeptons()->size() == cut["nLeptons"]) {
         // Access the first lepton in the list
         objectLep* selectedLepton = thisEvent->getSelLeptons()->at(0);
 
-        // Check if the lepton is an electron and if pT is greater than 30 GeV
-        if (selectedLepton->flavor == objectLep::kEle && selectedLepton->getp4()->Pt() > 30) {
-            // Event accepted, lepton is an electron with pT above 30 GeV
+        // Check if the lepton is an electron and if pT is greater than leadElePt
+        if (selectedLepton->flavor == objectLep::kEle && selectedLepton->getp4()->Pt() > leadElePt) {
+            // Event accepted, lepton is an electron with pT above leadElePt
             return true;
         }
-        // Check if the lepton is a muon and if pT is greater than 29 GeV
-        else if (selectedLepton->flavor == objectLep::kMuon && selectedLepton->getp4()->Pt() > 29) {
-            // Event accepted, lepton is a muon with pT above 29 GeV
+        // Check if the lepton is a muon and if pT is greater than leadMuonPt
+        else if (selectedLepton->flavor == objectLep::kMuon && selectedLepton->getp4()->Pt() > leadMuonPt) {
+            // Event accepted, lepton is a muon with pT above leadMuonPt
             return true;
         } else {
             // If the lepton does not meet the pT criteria
@@ -746,79 +746,79 @@ void ttHHanalyzer::analyze(event *thisEvent){
 	}
 	// HH & ZZ reco : 3 medium + 1 loose b jet case
     }
-    ////else if(thisEvent->getnbJet() == 3 && thisEvent->getnbLooseJet() > 3){
-    ////    for( int ibjet1 = 0; ibjet1 < lbJetsInv->size(); ibjet1++){
-    ////        for( int ibjet2 = 0; ibjet2 < bJetsInv->size(); ibjet2++){
-    ////    	if( lbJetsInv->at(ibjet1) == bJetsInv->at(ibjet2)) continue;
-    ////    	for( int ibjet3 = 0; ibjet3 < bJetsInv->size(); ibjet3++){
-    ////    	    if(lbJetsInv->at(ibjet1) == bJetsInv->at(ibjet3) || ibjet2 == ibjet3) continue;
-    ////    	    for( int ibjet4 = ibjet3+1; ibjet4 < bJetsInv->size(); ibjet4++){
-    ////    		if(lbJetsInv->at(ibjet1) == bJetsInv->at(ibjet4) || ibjet2 == ibjet4 || ibjet3 == ibjet4 ) continue;		
-    ////    		if( bJetsInv->at(ibjet2)->matchedtoHiggs == true && bJetsInv->at(ibjet3)->matchedtoHiggs == true && bJetsInv->at(ibjet4)->matchedtoHiggs == true){
-    ////    		    diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
-    ////    				 , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4() 
-    ////    				 , cHiggsMass, cHiggsMass, _minChi2HHMatched, _bbMassMinHH1Matched, _bbMassMinHH2Matched);
-    ////    		} else {
-    ////    		    diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
-    ////    				 , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4() 
-    ////    				 , cHiggsMass, cHiggsMass, _minChi2HHNotMatched, _bbMassMinHH1NotMatched, _bbMassMinHH2NotMatched);
-    ////    		}
+    else if(thisEvent->getnbJet() == 3 && thisEvent->getnbLooseJet() > 3){
+        for( int ibjet1 = 0; ibjet1 < lbJetsInv->size(); ibjet1++){
+            for( int ibjet2 = 0; ibjet2 < bJetsInv->size(); ibjet2++){
+        	if( lbJetsInv->at(ibjet1) == bJetsInv->at(ibjet2)) continue;
+        	for( int ibjet3 = 0; ibjet3 < bJetsInv->size(); ibjet3++){
+        	    if(lbJetsInv->at(ibjet1) == bJetsInv->at(ibjet3) || ibjet2 == ibjet3) continue;
+        	    for( int ibjet4 = ibjet3+1; ibjet4 < bJetsInv->size(); ibjet4++){
+        		if(lbJetsInv->at(ibjet1) == bJetsInv->at(ibjet4) || ibjet2 == ibjet4 || ibjet3 == ibjet4 ) continue;		
+        		if( bJetsInv->at(ibjet2)->matchedtoHiggs == true && bJetsInv->at(ibjet3)->matchedtoHiggs == true && bJetsInv->at(ibjet4)->matchedtoHiggs == true){
+        		    diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
+        				 , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4() 
+        				 , cHiggsMass, cHiggsMass, _minChi2HHMatched, _bbMassMinHH1Matched, _bbMassMinHH2Matched);
+        		} else {
+        		    diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
+        				 , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4() 
+        				 , cHiggsMass, cHiggsMass, _minChi2HHNotMatched, _bbMassMinHH1NotMatched, _bbMassMinHH2NotMatched);
+        		}
 
-    ////    		diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
-    ////    			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
-    ////    			     , cHiggsMass, cHiggsMass, _minChi2Higgs, _bbMassMin1Higgs, _bbMassMin2Higgs); 
-    ////    		diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
-    ////    			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
-    ////    			     , cZMass, cZMass, _minChi2Z, _bbMassMin1Z, _bbMassMin2Z); 
-    ////    		// ZH combinatorics 
-    ////    		diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4() // ZH H(lbb)Z(bb)
-    ////    			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
-    ////    			     , cHiggsMass, cZMass, _minChi2HiggsZ, _bbMassMin1HiggsZ, _bbMassMin2HiggsZ);  
-    ////    		tempminChi2 = _minChi2HiggsZ; tmpMassMin1HiggsZ = _bbMassMin1HiggsZ; tmpMassMin2HiggsZ = _bbMassMin2HiggsZ;
-    ////    		diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4() // ZH Z(lbb)H(bb)
-    ////    			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
-    ////    			     , cZMass, cHiggsMass, _minChi2HiggsZ, _bbMassMin2HiggsZ, _bbMassMin1HiggsZ); 
-    ////    		// pick the lowest minChi2 for the two combinatorics
-    ////    		if(tempminChi2 < _minChi2HiggsZ){
-    ////    		    _minChi2HiggsZ = tempminChi2; _bbMassMin1HiggsZ = tmpMassMin1HiggsZ; _bbMassMin2HiggsZ = tmpMassMin2HiggsZ;
-    ////    		}
-    ////    	    }
-    ////    	}
-    ////        }
-    ////    }
-    ////    // HH & ZZ reco : 3 medium b jet + 1 jet case 
-    ////}
-    ////else if(thisEvent->getnbJet() == 3){
-    ////    for( int ijet1 = 0; ijet1 < jetsInv->size(); ijet1++){
-    ////        for( int ibjet2 = 0; ibjet2 < bJetsInv->size(); ibjet2++){
-    ////    	if( jetsInv->at(ijet1) == bJetsInv->at(ibjet2)) continue;
-    ////    	for( int ibjet3 = 0; ibjet3 < bJetsInv->size(); ibjet3++){
-    ////    	    if(jetsInv->at(ijet1) == bJetsInv->at(ibjet3) || ibjet2 == ibjet3) continue;
-    ////    	    for( int ibjet4 = ibjet3+1; ibjet4 < bJetsInv->size(); ibjet4++){
-    ////    		if(jetsInv->at(ijet1) == bJetsInv->at(ibjet4) || ibjet2 == ibjet4 || ibjet3 == ibjet4 ) continue;		
-    ////    		diMotherReco(*jetsInv->at(ijet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
-    ////    			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
-    ////    			     , cHiggsMass, cHiggsMass, _minChi2Higgs, _bbMassMin1Higgs, _bbMassMin2Higgs);
-    ////    		diMotherReco(*jetsInv->at(ijet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
-    ////    			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
-    ////    			     , cZMass, cZMass, _minChi2Z, _bbMassMin1Z, _bbMassMin2Z);
-    ////    		// ZH combinatorics 
-    ////    		diMotherReco(*jetsInv->at(ijet1)->getp4(), *bJetsInv->at(ibjet2)->getp4() // ZH H(jb)Z(bb)
-    ////    			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
-    ////    			     , cHiggsMass, cZMass, _minChi2HiggsZ, _bbMassMin1HiggsZ, _bbMassMin2HiggsZ);
-    ////    		tempminChi2 = _minChi2HiggsZ; tmpMassMin1HiggsZ = _bbMassMin1HiggsZ; tmpMassMin2HiggsZ = _bbMassMin2HiggsZ;
-    ////    		diMotherReco(*jetsInv->at(ijet1)->getp4(), *bJetsInv->at(ibjet2)->getp4() // ZH Z(jb)H(bb)
-    ////    			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
-    ////    			     , cZMass, cHiggsMass, _minChi2HiggsZ, _bbMassMin2HiggsZ, _bbMassMin1HiggsZ);
-    ////    		// pick the lowest minChi2 for the two combinatorics
-    ////    		if(tempminChi2 < _minChi2HiggsZ){
-    ////    		    _minChi2HiggsZ = tempminChi2; _bbMassMin1HiggsZ = tmpMassMin1HiggsZ; _bbMassMin2HiggsZ = tmpMassMin2HiggsZ;
-    ////    		}
-    ////    	    }
-    ////    	}
-    ////        }
-    ////    }
-    ////}
+        		diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
+        			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
+        			     , cHiggsMass, cHiggsMass, _minChi2Higgs, _bbMassMin1Higgs, _bbMassMin2Higgs); 
+        		diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
+        			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
+        			     , cZMass, cZMass, _minChi2Z, _bbMassMin1Z, _bbMassMin2Z); 
+        		// ZH combinatorics 
+        		diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4() // ZH H(lbb)Z(bb)
+        			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
+        			     , cHiggsMass, cZMass, _minChi2HiggsZ, _bbMassMin1HiggsZ, _bbMassMin2HiggsZ);  
+        		tempminChi2 = _minChi2HiggsZ; tmpMassMin1HiggsZ = _bbMassMin1HiggsZ; tmpMassMin2HiggsZ = _bbMassMin2HiggsZ;
+        		diMotherReco(*lbJetsInv->at(ibjet1)->getp4(), *bJetsInv->at(ibjet2)->getp4() // ZH Z(lbb)H(bb)
+        			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
+        			     , cZMass, cHiggsMass, _minChi2HiggsZ, _bbMassMin2HiggsZ, _bbMassMin1HiggsZ); 
+    		// pick the lowest minChi2 for the two combinatorics
+        		if(tempminChi2 < _minChi2HiggsZ){
+        		    _minChi2HiggsZ = tempminChi2; _bbMassMin1HiggsZ = tmpMassMin1HiggsZ; _bbMassMin2HiggsZ = tmpMassMin2HiggsZ;
+        		}
+        	    }
+        	}
+            }
+        }
+        // HH & ZZ reco : 3 medium b jet + 1 jet case 
+    }
+    else if(thisEvent->getnbJet() == 3){
+        for( int ijet1 = 0; ijet1 < jetsInv->size(); ijet1++){
+            for( int ibjet2 = 0; ibjet2 < bJetsInv->size(); ibjet2++){
+        	if( jetsInv->at(ijet1) == bJetsInv->at(ibjet2)) continue;
+        	for( int ibjet3 = 0; ibjet3 < bJetsInv->size(); ibjet3++){
+        	    if(jetsInv->at(ijet1) == bJetsInv->at(ibjet3) || ibjet2 == ibjet3) continue;
+        	    for( int ibjet4 = ibjet3+1; ibjet4 < bJetsInv->size(); ibjet4++){
+        		if(jetsInv->at(ijet1) == bJetsInv->at(ibjet4) || ibjet2 == ibjet4 || ibjet3 == ibjet4 ) continue;		
+        		diMotherReco(*jetsInv->at(ijet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
+        			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
+        			     , cHiggsMass, cHiggsMass, _minChi2Higgs, _bbMassMin1Higgs, _bbMassMin2Higgs);
+        		diMotherReco(*jetsInv->at(ijet1)->getp4(), *bJetsInv->at(ibjet2)->getp4()
+        			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
+        			     , cZMass, cZMass, _minChi2Z, _bbMassMin1Z, _bbMassMin2Z);
+        		// ZH combinatorics 
+        		diMotherReco(*jetsInv->at(ijet1)->getp4(), *bJetsInv->at(ibjet2)->getp4() // ZH H(jb)Z(bb)
+        			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
+        			     , cHiggsMass, cZMass, _minChi2HiggsZ, _bbMassMin1HiggsZ, _bbMassMin2HiggsZ);
+        		tempminChi2 = _minChi2HiggsZ; tmpMassMin1HiggsZ = _bbMassMin1HiggsZ; tmpMassMin2HiggsZ = _bbMassMin2HiggsZ;
+        		diMotherReco(*jetsInv->at(ijet1)->getp4(), *bJetsInv->at(ibjet2)->getp4() // ZH Z(jb)H(bb)
+        			     , *bJetsInv->at(ibjet3)->getp4(), *bJetsInv->at(ibjet4)->getp4()
+        			     , cZMass, cHiggsMass, _minChi2HiggsZ, _bbMassMin2HiggsZ, _bbMassMin1HiggsZ);
+        		// pick the lowest minChi2 for the two combinatorics
+        		if(tempminChi2 < _minChi2HiggsZ){
+        		    _minChi2HiggsZ = tempminChi2; _bbMassMin1HiggsZ = tmpMassMin1HiggsZ; _bbMassMin2HiggsZ = tmpMassMin2HiggsZ;
+        		}
+        	    }
+        	}
+            }
+        }
+    }
     
 
     //    std::map<std::string, float> testVars = HypoComb->GetBestPermutation(getLepP4(thisEvent),getJetP4(thisEvent),getJetCSV(thisEvent),*(thisEvent->getMET()->getp4()));
