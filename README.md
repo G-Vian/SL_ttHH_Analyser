@@ -38,6 +38,10 @@ cd <Path to Analyzer>/ttHHAnalyzer
 cmsenv
 source setup.sh  # required for setup
 make -j4
+
+
+(faster all in one line) git clone https://github.com/G-Vian/SL_ttHH_Analyser.git && wget https://cernbox.cern.ch/remote.php/dav/public-files/xPBQqigATEjgFQb/TTH.tar.gz && tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz && mv TTH  SL_ttHH_Analyser/. && cd SL_ttHH_Analyser && cmsenv && source setup.sh  && make -j4 
+
 ```
 
 ## Creating a Proxy
