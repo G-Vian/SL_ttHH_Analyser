@@ -476,32 +476,32 @@ if (thisEvent->getSelLeptons()->size() == cut["nLeptons"] && thisEvent->getSelLe
     hCutFlow->Fill("nlepton==1", 1);
     hCutFlow_w->Fill("nlepton==1", _weight);
 
-    // Check if the leptons vector is not empty
-    if (!thisEvent->getSelLeptons()->empty()) {
-        // Access the first lepton in the list
-        objectLep* selectedLepton = thisEvent->getSelLeptons()->at(0);
-
-        // Check if the lepton is an electron and if pT is greater than leadElePt
-        if (selectedLepton->flavor == objectLep::kEle && selectedLepton->getp4()->Pt() > leadElePt) {
-            // Event accepted, lepton is an electron with pT above leadElePt
-            return true;
-        }
-        // Check if the lepton is a muon and if pT is greater than leadMuonPt
-        else if (selectedLepton->flavor == objectLep::kMuon && selectedLepton->getp4()->Pt() > leadMuonPt) {
-            // Event accepted, lepton is a muon with pT above leadMuonPt
-            return true;
-        } else {
-            // If the lepton does not meet the pT criteria
-            return false;
-        }
-    } else {
-        // If there are no selected leptons
-        return false;
-    }
-} else {
-    // If the number of leptons is not equal to the expected value
-    return false;
-}
+	    // Check if the leptons vector is not empty
+	    if (!thisEvent->getSelLeptons()->empty()) {
+	        // Access the first lepton in the list
+	        objectLep* selectedLepton = thisEvent->getSelLeptons()->at(0);
+	
+	        // Check if the lepton is an electron and if pT is greater than leadElePt
+	        if (selectedLepton->flavor == objectLep::kEle && selectedLepton->getp4()->Pt() > cut["leadElePt"]) {
+	            // Event accepted, lepton is an electron with pT above leadElePt
+	            return true;
+	        }
+	        // Check if the lepton is a muon and if pT is greater than leadMuonPt
+	        else if (selectedLepton->flavor == objectLep::kMuon && selectedLepton->getp4()->Pt() > cut["leadMuonPt"]) {
+	            // Event accepted, lepton is a muon with pT above leadMuonPt
+	            return true;
+	        } else {
+	            // If the lepton does not meet the pT criteria
+	            return false;
+	        }
+	    } else {
+	        // If there are no selected leptons
+	        return false;
+	    }
+	} else {
+	    // If the number of leptons is not equal to the expected value
+	    return false;
+	}
 
 
   /* (original)
