@@ -1268,6 +1268,8 @@ class ttHHanalyzer {
 	hLepCharge2 = new TH1F("lepCharge2"+trail, "lepCh2"+trail, 4, -2, 2);
 	    
 	hleptonNumber = new TH1F("lepNumber"+trail, "N_{lep}"+trail, 4, 0, 4);
+	hElecNumber = new TH1F("ElecNumber"+trail, "N_{Elec}"+trail, 4, 0, 4);
+	hMuonNumber = new TH1F("MuonNumber"+trail, "N_{Muon}"+trail, 4, 0, 4);
 	hleptonHT = new TH1F("leptonHT"+trail, "H_{T}^{lep} [GeV]"+trail, 50, 0, 2000);
 	hST = new TH1F("ST"+trail, "S_{T} [GeV]"+trail, 50, 0, 2000);
 	hDiMuonMass = new TH1F("diMuonMass"+trail, "m_{#mu#mu} [GeV]"+trail, 50, 0, 200);
