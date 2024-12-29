@@ -123,97 +123,97 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
     );
 
 
-    ////if(_DataOrMC == "Data") {
+    if(_DataOrMC == "Data") {
 
-    ////    if(_sampleName == "JetHT_B"){
-    ////        thisEvent->setHadTrigger(
+        if(_sampleName == "JetHT_B"){
+            thisEvent->setHadTrigger(
 
-    ////            (_ev->HLT_PFHT1050 ||
-    ////            _ev->HLT_PFHT430_SixJet40_BTagCSV_p080 ||
-    ////            _ev->HLT_PFHT380_SixJet32_DoubleBTagCSV_p075) &&
+                (_ev->HLT_PFHT1050 ||
+                _ev->HLT_PFHT430_SixJet40_BTagCSV_p080 ||
+                _ev->HLT_PFHT380_SixJet32_DoubleBTagCSV_p075) &&
 
-    ////            !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
-    ////              _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
-    ////        );
-    ////    }
-    ////    else if (_sampleName == "JetHT_C" || _sampleName == "JetHT_D" 
-    ////            || _sampleName == "JetHT_E" || _sampleName == "JetHT_F"){
-    ////        thisEvent->setHadTrigger(
-    ////            (_ev->HLT_PFHT1050 ||
-    ////            _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
-    ////            _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2) &&
+                !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
+                  _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
+            );
+        }
+        else if (_sampleName == "JetHT_C" || _sampleName == "JetHT_D" 
+                || _sampleName == "JetHT_E" || _sampleName == "JetHT_F"){
+            thisEvent->setHadTrigger(
+                (_ev->HLT_PFHT1050 ||
+                _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
+                _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2) &&
 
-    ////            !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
-    ////              _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
-    ////        );
-    ////    }
-    ////    else if(_sampleName == "BTagCSV_B"){
-    ////        thisEvent->setHadTrigger(
-    ////            _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07
-    ////        );
-    ////    }
-    ////    else if(_sampleName == "BTagCSV_C" || _sampleName == "BTagCSV_D" 
-    ////            || _sampleName == "BTagCSV_E" || _sampleName == "BTagCSV_F"){
+                !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
+                  _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
+            );
+        }
+        else if(_sampleName == "BTagCSV_B"){
+            thisEvent->setHadTrigger(
+                _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07
+            );
+        }
+        else if(_sampleName == "BTagCSV_C" || _sampleName == "BTagCSV_D" 
+                || _sampleName == "BTagCSV_E" || _sampleName == "BTagCSV_F"){
 
-    ////        thisEvent->setHadTrigger(
-    ////            _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0
-    ////        );
-    ////    }
-    ////    else if (_sampleName == "SingleMuon_B" || _sampleName == "SingleMuon_C" || _sampleName == "SingleMuon_D" 
-    ////            || _sampleName == "SingleMuon_E" || _sampleName == "SingleMuon_F"){
-    ////        thisEvent->setHadTrigger(
-    ////            (_ev->HLT_PFHT1050 ||
-    ////            _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
-    ////            _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2) &&
+            thisEvent->setHadTrigger(
+                _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0
+            );
+        }
+        else if (_sampleName == "SingleMuon_B" || _sampleName == "SingleMuon_C" || _sampleName == "SingleMuon_D" 
+                || _sampleName == "SingleMuon_E" || _sampleName == "SingleMuon_F"){
+            thisEvent->setHadTrigger(
+                (_ev->HLT_PFHT1050 ||
+                _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
+                _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2) &&
 
-    ////            !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
-    ////              _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
-    ////        );
-    ////           //print("This is the Single Muon Data Set", "b");
-    ////    }
-    ////    else {
-    ////        print("This is weird, I assume there is/are more than 1 Data sample without JetHT & BTagCSV", "r", "error");
-    ////        std::exit(EXIT_FAILURE);
-    ////    }
-    ////}
-    ////else if(_DataOrMC == "MC"){
-    ////     thisEvent->setHadTrigger(
-    ////         _ev->HLT_PFHT1050 ||
-    ////         _ev->HLT_PFHT430_SixJet40_BTagCSV_p080 ||
-    ////         _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
-    ////         _ev->HLT_PFHT380_SixJet32_DoubleBTagCSV_p075 ||
-    ////         _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2 ||
-    ////         _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
-    ////         _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0
-    ////     );
-    ////}
-    ////else {
-    ////    print("This is weird, You need to set the data type as Data or MC. Please check the arguments", "r", "error");
-    ////    std::exit(EXIT_FAILURE);
-    ////}
+                !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
+                  _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
+            );
+               print("This is the Single Muon Data Set", "b");
+        }
+        else {
+            print("This is weird, I assume there is/are more than 1 Data sample without JetHT & BTagCSV", "r", "error");
+            std::exit(EXIT_FAILURE);
+        }
+    
+    else if(_DataOrMC == "MC"){
+         thisEvent->setHadTrigger(
+             _ev->HLT_PFHT1050 ||
+             _ev->HLT_PFHT430_SixJet40_BTagCSV_p080 ||
+             _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
+             _ev->HLT_PFHT380_SixJet32_DoubleBTagCSV_p075 ||
+             _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2 ||
+             _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
+             _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0
+         );
+    }
+    else {
+        print("This is weird, You need to set the data type as Data or MC. Please check the arguments", "r", "error");
+        std::exit(EXIT_FAILURE);
+  }
 
 
     
-//    thisEvent->setTrigger(_ev->HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL ||
-//			  _ev->HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ ||
-//			  _ev->HLT_Ele27_WPTight_Gsf ||
-//			  _ev->HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL ||
-//			  _ev->HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ ||
-//			  _ev->HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ ||
-//			  _ev->HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ ||
-//			  _ev->HLT_Ele32_WPTight_Gsf ||
-//			  _ev->HLT_IsoMu24_eta2p1 ||
-//			  _ev->HLT_IsoMu27 ||
-//			  _ev->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ ||
-//			  _ev->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 ||
-//			  _ev->HLT_IsoMu24_eta2p1 ||
-//			  _ev->HLT_IsoMu27);
-    //thisEvent->setFilter(_ev->Flag_goodVertices ||
-    //			 _ev->Flag_globalSuperTightHalo2016Filter ||
-    //			 _ev->Flag_HBHENoiseFilter ||
-    //			 _ev->Flag_HBHENoiseIsoFilter ||
-    //			 _ev->Flag_EcalDeadCellTriggerPrimitiveFilter ||
-    //			 _ev->Flag_BadPFMuonFilter);
+    thisEvent->setTrigger(_ev->HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL ||
+			  _ev->HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL_DZ ||
+			  _ev->HLT_Ele27_WPTight_Gsf ||
+			  _ev->HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL ||
+			  _ev->HLT_Mu23_TrkIsoVVL_Ele12_CaloIdL_TrackIdL_IsoVL_DZ ||
+			  _ev->HLT_Mu12_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ ||
+			  _ev->HLT_Mu8_TrkIsoVVL_Ele23_CaloIdL_TrackIdL_IsoVL_DZ ||
+			  _ev->HLT_Ele32_WPTight_Gsf ||
+			  _ev->HLT_IsoMu24_eta2p1 ||
+			  _ev->HLT_IsoMu27 ||
+			  _ev->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ ||
+			  _ev->HLT_Mu17_TrkIsoVVL_Mu8_TrkIsoVVL_DZ_Mass3p8 ||
+			  _ev->HLT_IsoMu24_eta2p1 ||
+			  _ev->HLT_IsoMu27);
+    thisEvent->setFilter(_ev->Flag_goodVertices ||
+    			 _ev->Flag_globalSuperTightHalo2016Filter ||
+    			 _ev->Flag_HBHENoiseFilter ||
+    			 _ev->Flag_HBHENoiseIsoFilter ||
+    			 _ev->Flag_EcalDeadCellTriggerPrimitiveFilter ||
+    			 _ev->Flag_BadPFMuonFilter);
    
 	
     thisEvent->setPV(_ev->PV_npvsGood); // Sets the primary vertex (PV) of the event.
@@ -1015,6 +1015,8 @@ void ttHHanalyzer::fillHistos(event * thisEvent){
     }
 
     hleptonNumber->Fill(thisEvent->getnSelLepton(),_weight*thisEvent->getbTagSys());
+    hElecNumber->Fill(thisEvent->getnSelElectron(),_weight*thisEvent->getbTagSys());
+    hMuonNumber->Fill(thisEvent->getnSelMuon(),_weight*thisEvent->getbTagSys());
 
 
     //if(thisEvent->getnSelMuon() == 2){
