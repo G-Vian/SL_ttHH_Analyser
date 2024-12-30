@@ -128,10 +128,50 @@ class objectJet:public objectPhysics {
     float matchedtoHiggsdR = 0.;
     //int bTag;
     float bTagCSV, jetID, jetPUid;
+    static constexpr float valbTagTight2017  = 0.7476;
+    static constexpr float valbTagMedium2017 = 0.3040;
+    static constexpr float valbTagLoose2017  = 0.0532;
+    static constexpr float valbTagTight2018  = 0.7100; 
+    static constexpr float valbTagMedium2018 = 0.2783; 
+    static constexpr float valbTagLoose2018  = 0.0490; 
+    float valbTagTight;
+    float valbTagMedium;
+    float valbTagLoose;
+    
+    float getValbTagTight(int year){
+	if(year == 2017){
+	    return valbTagTight2017;
+	} else if (year == 2018){
+	    return valbTagTight2018;
+	}
+    }
+    
+    float getValbTagMedium(int year){
+	if(year == 2017){
+	    return valbTagMedium2017;
+	} else if (year == 2018){ 
+	    return valbTagMedium2018;
+	}
+    }
+    
+    float getValbTagLoose(int year){
+	if(year == 2017){
+	    return valbTagLoose2017;
+	} else if (year == 2018){
+	    return valbTagLoose2018;
+	}
+    }
+    
+    
+};
+
+
+
+/*    float bTagCSV, jetID, jetPUid;
     static constexpr float valbTagTight  = 0.7476; //This is not used
     static constexpr float valbTagMedium = 0.3040;
     static constexpr float valbTagLoose  = 0.0532;
-};
+};*/
 
 class objectMET:public objectPhysics {
  public:
