@@ -135,7 +135,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
                 !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
                   _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
             );
-        }
+        }}
         else if (_sampleName == "JetHT_C" || _sampleName == "JetHT_D" 
                 || _sampleName == "JetHT_E" || _sampleName == "JetHT_F"){
             thisEvent->setHadTrigger(
@@ -245,7 +245,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
 		if(boostedJet[i].particleNet_HbbvsQCD > cut["bTagDisc"]){
 		    thisEvent->selectHadronicHiggs(currentBoostedJet);
 		}
-		//	}
+			}
 	    }
 	}
     }
