@@ -56,7 +56,7 @@ map<std::string, float> cut {
     , {"eleID", 4} // this is for tight electrons
     , {"muonID", 4} // this is for tight muon 
     , {"muonIso", 0.2} // muon isolation less than
-    , {"eleIso", 0.1}  // ele isolation less than
+    , {"eleIso", 0.2}  // ele isolation less than
     , {"jetID", 6}   // pass tight and tightLepVeto ID
     , {"jetPUid", 4}   // pass loose cut fail tight and medium
     , {"bTagDisc", 0.80}
