@@ -122,76 +122,62 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
         _ev->HLT_IsoMu27
     );
 
-
-    if(_DataOrMC == "Data") {
-
-        if(_sampleName == "JetHT_B"){
-            thisEvent->setHadTrigger(
-
-                (_ev->HLT_PFHT1050 ||
-                _ev->HLT_PFHT430_SixJet40_BTagCSV_p080 ||
-                _ev->HLT_PFHT380_SixJet32_DoubleBTagCSV_p075) &&
-
-                !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
-                  _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
-            );
-        }}
-        else if (_sampleName == "JetHT_C" || _sampleName == "JetHT_D" 
-                || _sampleName == "JetHT_E" || _sampleName == "JetHT_F"){
-            thisEvent->setHadTrigger(
-                (_ev->HLT_PFHT1050 ||
-                _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
-                _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2) &&
-
-                !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
-                  _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
-            );
-        }
-        else if(_sampleName == "BTagCSV_B"){
-            thisEvent->setHadTrigger(
-                _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07
-            );
-        }
-        else if(_sampleName == "BTagCSV_C" || _sampleName == "BTagCSV_D" 
-                || _sampleName == "BTagCSV_E" || _sampleName == "BTagCSV_F"){
-
-            thisEvent->setHadTrigger(
-                _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0
-            );
-        }
-        else if (_sampleName == "SingleMuon_B" || _sampleName == "SingleMuon_C" || _sampleName == "SingleMuon_D" 
-                || _sampleName == "SingleMuon_E" || _sampleName == "SingleMuon_F"){
-            thisEvent->setHadTrigger(
-                (_ev->HLT_PFHT1050 ||
-                _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
-                _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2) &&
-
-                !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
-                  _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
-            );
-               print("This is the Single Muon Data Set", "b");
-        }
-        else {
-            print("This is weird, I assume there is/are more than 1 Data sample without JetHT & BTagCSV", "r", "error");
-            std::exit(EXIT_FAILURE);
-        }
-    
-    if(_DataOrMC == "MC"){
-         thisEvent->setHadTrigger(
-             _ev->HLT_PFHT1050 ||
+if (_DataOrMC == "Data") {
+    if (_sampleName == "JetHT_B") {
+        thisEvent->setHadTrigger(
+            (_ev->HLT_PFHT1050 ||
              _ev->HLT_PFHT430_SixJet40_BTagCSV_p080 ||
+             _ev->HLT_PFHT380_SixJet32_DoubleBTagCSV_p075) &&
+            !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
+              _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
+        );
+    } else if (_sampleName == "JetHT_C" || _sampleName == "JetHT_D" || 
+               _sampleName == "JetHT_E" || _sampleName == "JetHT_F") {
+        thisEvent->setHadTrigger(
+            (_ev->HLT_PFHT1050 ||
              _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
-             _ev->HLT_PFHT380_SixJet32_DoubleBTagCSV_p075 ||
-             _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2 ||
-             _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
-             _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0
-         );
-    }
-    else {
-        print("This is weird, You need to set the data type as Data or MC. Please check the arguments", "r", "error");
+             _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2) &&
+            !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
+              _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
+        );
+    } else if (_sampleName == "BTagCSV_B") {
+        thisEvent->setHadTrigger(
+            _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07
+        );
+    } else if (_sampleName == "BTagCSV_C" || _sampleName == "BTagCSV_D" || 
+               _sampleName == "BTagCSV_E" || _sampleName == "BTagCSV_F") {
+        thisEvent->setHadTrigger(
+            _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0
+        );
+    } else if (_sampleName == "SingleMuon_B" || _sampleName == "SingleMuon_C" || 
+               _sampleName == "SingleMuon_D" || _sampleName == "SingleMuon_E" || 
+               _sampleName == "SingleMuon_F") {
+        thisEvent->setHadTrigger(
+            (_ev->HLT_PFHT1050 ||
+             _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
+             _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2) &&
+            !(_ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
+              _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0)
+        );
+        print("This is the Single Muon Data Set", "b");
+    } else {
+        print("This is weird, I assume there is/are more than 1 Data sample without JetHT & BTagCSV", "r", "error");
         std::exit(EXIT_FAILURE);
-  }
-
+    }
+} else if (_DataOrMC == "MC") {
+    thisEvent->setHadTrigger(
+        _ev->HLT_PFHT1050 ||
+        _ev->HLT_PFHT430_SixJet40_BTagCSV_p080 ||
+        _ev->HLT_PFHT430_SixPFJet40_PFBTagCSV_1p5 ||
+        _ev->HLT_PFHT380_SixJet32_DoubleBTagCSV_p075 ||
+        _ev->HLT_PFHT380_SixPFJet32_DoublePFBTagCSV_2p2 ||
+        _ev->HLT_HT300PT30_QuadJet_75_60_45_40_TripeCSV_p07 ||
+        _ev->HLT_PFHT300PT30_QuadPFJet_75_60_45_40_TriplePFBTagCSV_3p0
+    );
+} else {
+    print("This is weird, You need to set the data type as Data or MC. Please check the arguments", "r", "error");
+    std::exit(EXIT_FAILURE);
+}
 
     
     thisEvent->setTrigger(_ev->HLT_Ele23_Ele12_CaloIdL_TrackIdL_IsoVL ||
