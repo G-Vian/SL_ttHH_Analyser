@@ -134,9 +134,9 @@ class objectJet:public objectPhysics {
     static constexpr float valbTagTight2018  = 0.7100; 
     static constexpr float valbTagMedium2018 = 0.2783; 
     static constexpr float valbTagLoose2018  = 0.0490; 
-    float valbTagTight;
-    float valbTagMedium;
-    float valbTagLoose;
+    static constexpr float valbTagTight  = 0.7476; //This is not used
+    static constexpr float valbTagMedium = 0.3040;
+    static constexpr float valbTagLoose  = 0.0532;
     
     float getValbTagTight(int year){
 	if(year == 2017){
