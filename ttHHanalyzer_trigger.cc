@@ -1200,7 +1200,8 @@ void ttHHanalyzer::writeHistos(){
     //hLepCharge2->Write();
 
     hleptonNumber->Write();
-   // hDiMuonMass->Write();
+    hElecNumber->Write();
+    hMuonNumber->Write();
    // hDiElectronMass->Write();
    // hDiMuonPT->Write();
   //  hDiElectronPT->Write();
