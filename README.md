@@ -28,7 +28,6 @@ wget https://cernbox.cern.ch/remote.php/dav/public-files/xPBQqigATEjgFQb/TTH.tar
 
 tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz
 mv TTH  SL_ttHH_Analyser/.
-(faster) tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz && mv TTH  SL_ttHH_Analyser/.
 ```
 
 ## Compilation to make execution file
@@ -39,10 +38,14 @@ cmsenv
 source setup.sh  # required for setup
 make -j4
 
-
-(faster all in one line) git clone https://github.com/G-Vian/SL_ttHH_Analyser.git && wget https://cernbox.cern.ch/remote.php/dav/public-files/xPBQqigATEjgFQb/TTH.tar.gz && tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz && mv TTH  SL_ttHH_Analyser/. && cd SL_ttHH_Analyser && cmsenv && source setup.sh  && make -j4 
+ 
 
 ```
+## All in one line (faster):
+```bash
+git clone https://github.com/G-Vian/SL_ttHH_Analyser.git && wget https://cernbox.cern.ch/remote.php/dav/public-files/xPBQqigATEjgFQb/TTH.tar.gz && tar -zxvf TTH.tar.gz && rm -rf TTH.tar.gz && mv TTH  SL_ttHH_Analyser/. && cd SL_ttHH_Analyser && cmsenv && source setup.sh  && make -j4 
+```
+
 
 ## Creating a Proxy
 The proxy provides the necessary permissions for accessing grid jobs, Condor jobs, and samples on lxplus. If you’re a member of the **CERN CMS VO** with the required permissions, you can generate a proxy using the ```voms-proxy-init``` command.
