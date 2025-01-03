@@ -54,7 +54,8 @@ If you specify an output file for the proxy with the ```--out``` option, set the
 ```bash
 voms-proxy-init --voms cms --valid 96:00 --out proxy.cert
 export X509_USER_PROXY=proxy.cert
-(faster) voms-proxy-init --voms cms --valid 96:00 --out proxy.cert && export X509_USER_PROXY=proxy.cert
+All in one line (faster):
+voms-proxy-init --voms cms --valid 96:00 --out proxy.cert && export X509_USER_PROXY=proxy.cert
 
 ```
 Currently, to submit Condor jobs, a **proxy.cert** file with valid time remaining must be present in the analyzer directory. You can check the remaining valid time with the following command:
