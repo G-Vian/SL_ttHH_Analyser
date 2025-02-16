@@ -138,26 +138,26 @@ class objectJet:public objectPhysics {
     static constexpr float valbTagMedium = 0.3040;
     static constexpr float valbTagLoose  = 0.0532;
     
-    float getValbTagTight(int year){
-	if(year == 2017){
+    float getValbTagTight(std::string runYear){
+	if(runYear == "2017"){
 	    return valbTagTight2017;
-	} else if (year == 2018){
+	} else if (runYear == "2018"){
 	    return valbTagTight2018;
 	}
     }
     
-    float getValbTagMedium(int year){
-	if(year == 2017){
+    float getValbTagMedium(std::string runYear){
+	if(runYear == "2017"){
 	    return valbTagMedium2017;
-	} else if (year == 2018){ 
+	} else if (runYear == "2018"){ 
 	    return valbTagMedium2018;
 	}
     }
     
-    float getValbTagLoose(int year){
-	if(year == 2017){
+    float getValbTagLoose(std::string runYear){
+	if(runYear == "2017"){
 	    return valbTagLoose2017;
-	} else if (year == 2018){
+	} else if (runYear == "2018"){
 	    return valbTagLoose2018;
 	}
     }
