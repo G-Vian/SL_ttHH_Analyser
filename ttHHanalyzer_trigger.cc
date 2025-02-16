@@ -123,7 +123,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
     );
 ///Gamze's 
 	
-    if(_year == "2017"){
+    if(_runYear == "2017"){
 	if(_DataOrMC == "Data"){
 	    thisEvent->setFilter(_ev->Flag_goodVertices ||
 				 _ev->Flag_globalSuperTightHalo2016Filter ||
@@ -182,7 +182,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
 				  _ev->HLT_IsoMu24_eta2p1 ||
 				  _ev->HLT_IsoMu27);
 	}
-    }  else if(_year == "2018"){
+    }  else if(_runYear == "2018"){
 	if(_DataOrMC == "Data"){
 	    thisEvent->setFilter(_ev->Flag_goodVertices ||
 				 _ev->Flag_globalSuperTightHalo2016Filter ||
