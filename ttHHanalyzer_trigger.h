@@ -29,10 +29,10 @@ const float cZMass = 91.;
 
 
 map<std::string, float> cut { 
-    {"nJets", 4} // nJets higher than 
+    {"nJets", 5} // nJets higher than 
     , {"nLeptons", 1} // nLepton equals to
     //, {"nVetoLeptons", 0} // nVetoLepton equals to
-    , {"nbJets", 3} // #_b_tagged_jets?
+    , {"nbJets", 4} // #_b_tagged_jets?
     , {"jetPt", 30} // jet pT higher than
     ////, {"leadElePt", 25} // leadElectron pT higher than
     ////, {"leadMuonPt", 25} // leadMuon pT higher than
@@ -49,14 +49,14 @@ map<std::string, float> cut {
     , {"HT", 0}
     , {"nlJets", 0} // light jet higher than
     , {"hadHiggsPt", 20} // hadronic Higgs pT higher than (what is this variable?)
-    , {"jetEta", 2.5} // jet eta higher than
+    , {"jetEta", 2.4} // jet eta higher than
     , {"eleEta", 2.5} // electron eta higher than
-    , {"muonEta", 2.5} // muon eta higher than
+    , {"muonEta", 2.4} // muon eta higher than
     , {"boostedJetEta", 2.4} // boostedJet eta higher than
     , {"eleID", 4} // this is for tight electrons
     , {"muonID", 4} // this is for tight muon 
     , {"muonIso", 0.2} // muon isolation less than
-    , {"eleIso", 0.2}  // ele isolation less than
+    , {"eleIso", 0.06}  // ele isolation less than
     , {"jetID", 6}   // pass tight and tightLepVeto ID
     , {"jetPUid", 4}   // pass loose cut fail tight and medium
     , {"bTagDisc", 0.80}
@@ -984,7 +984,7 @@ class ttHHanalyzer {
 
 
 
-    fifo_map<std::string,int> cutflow{{"noCut", 0}, {"leadElePt", 30}, {"leadMuonPt", 29}, {"MuonTrigger", 0}, {"njets>=4", 0}, {"nbjets>=3", 0}, {"6thJetsPT>20", 0}, {"nlepton==1", 0}, {"MET>20", 0}, {"nljets>=2", 0}, {"30<ljetsM<250", 0}, {"HadTrigger", 0}};
+    fifo_map<std::string,int> cutflow{{"count_elec", 0}, {"count_muon", 0}, {"noCut", 0}, {"leadElePt", 30}, {"leadMuonPt", 29}, {"MuonTrigger", 0}, {"njets>=5", 0}, {"nbjets>=4", 0}, {"6thJetsPT>20", 0}, {"nlepton==1", 0}, {"MET>20", 0}, {"nljets>=2", 0}, {"30<ljetsM<250", 0}, {"HadTrigger", 0}};
     //fifo_map<std::string,int> cutflow_w{{"noCut", 0}, {"MuonTrigger", 0}, {"nJets>=6", 0}, {"nbJets>=4", 0}, {"6thJetsPT>40", 0}, {"nlepton==0", 0}, {"HT>500", 0}, {"nljets>=2", 0}, {"30<ljetsM<250", 0}, {"HadTrigger", 0}};
     //    fifo_map<std::string,int> cutflow{{"noCut", 0}, {"njets>3", 0}, {"nbjets>2", 0}, {"nlepton==2", 0}, {"nOpositeChargedLep", 0}, {"nMassCut", 0}, {"nTotal", 0}};
 
