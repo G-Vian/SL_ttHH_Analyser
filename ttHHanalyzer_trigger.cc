@@ -541,17 +541,17 @@ bool ttHHanalyzer::selectObjects(event *thisEvent){
     if(!(thisEvent->getnSelJet() >= cut["nJets"] )){
 	return false;
     }
-    cutflow["njets>=4"]+=1;                 
-    hCutFlow->Fill("njets>=4",1);
-    hCutFlow_w->Fill("njets>=4",_weight);
+    cutflow["njets>=5"]+=1;                 
+    hCutFlow->Fill("njets>=5",1);
+    hCutFlow_w->Fill("njets>=5",_weight);
 
 
     if(!(thisEvent->getnbJet() >= cut["nbJets"])){
 	    return false;
     }
-    cutflow["nbjets>=3"]+=1;                 
-    hCutFlow->Fill("nbjets>=3",1);
-    hCutFlow_w->Fill("nbjets>=3",_weight);
+    cutflow["nbjets>=4"]+=1;                 
+    hCutFlow->Fill("nbjets>=4",1);
+    hCutFlow_w->Fill("nbjets>=4",_weight);
     
 
 	
@@ -593,11 +593,13 @@ if (thisEvent->getSelLeptons()->size() == cut["nLeptons"] && thisEvent->getSelLe
 	        // Check if the lepton is an electron and if pT is greater than leadElePt
 	        if (selectedLepton->flavor == objectLep::kEle && selectedLepton->getp4()->Pt() > cut["leadElePt"] ) {
 	            // Event accepted, lepton is an electron with pT above leadElePt
+		    cutflow["count_elec"]+=1;	        
 	            return true;
 	        }
 	        // Check if the lepton is a muon and if pT is greater than leadMuonPt
 	        else if (selectedLepton->flavor == objectLep::kMuon && selectedLepton->getp4()->Pt() > cut["leadMuonPt"]) {
 	            // Event accepted, lepton is a muon with pT above leadMuonPt
+		    cutflow["count_muon"]+=1;	       
 	            return true;
 	        } else {
 	            // If the lepton does not meet the pT criteria
