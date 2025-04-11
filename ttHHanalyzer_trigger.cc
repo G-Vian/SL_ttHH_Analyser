@@ -240,7 +240,7 @@ void ttHHanalyzer::createObjects(event * thisEvent, sysName sysType, bool up){
     }
 
 
-
+/* I Suspect these are for the Hadronic analysis
 
 
 
@@ -323,7 +323,7 @@ if (_DataOrMC == "Data") {
     			 _ev->Flag_HBHENoiseIsoFilter ||
     			 _ev->Flag_EcalDeadCellTriggerPrimitiveFilter ||
     			 _ev->Flag_BadPFMuonFilter);
-   
+   */
 	
     thisEvent->setPV(_ev->PV_npvsGood); // Sets the primary vertex (PV) of the event.
     std::vector<eventBuffer::GenPart_s> genPart = _ev->GenPart; // Creates a vector 'genPart' to hold all generator-level particles (GenPart), getting the data from '_ev'.
